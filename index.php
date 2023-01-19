@@ -7,6 +7,5 @@
 	<title>Index - Tienda moviles</title>
 </head>
 <body>
-	<p>Archivo Modificado</p>
 </body>
 </html>
