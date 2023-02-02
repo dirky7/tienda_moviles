@@ -8,5 +8,10 @@
 </head>
 <body>
 	<p>Hola</p>
+	<!--
+
+	PAGINA PRINCIPAL DE FORMULARIOS
+
+	-->
 </body>
 </html>
