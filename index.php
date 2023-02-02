@@ -7,5 +7,6 @@
 	<title>Index - Tienda moviles</title>
 </head>
 <body>
+	<p>Hola</p>
 </body>
 </html>
