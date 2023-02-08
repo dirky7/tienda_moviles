@@ -17,7 +17,7 @@ if (isset($_POST['inicioSesion'])) {
                 $_SESSION['usuario']=$login;
                 $_SESSION['hora']=date("H:i",time());
                 //Nos redirige a la pagina usuario
-                header("Location:gestion.php");
+                header("Location:./tecnico/gestion.php");
 			} else {
 				$error = "Datos incorrectos";
 			}
@@ -60,7 +60,7 @@ if (isset($_POST['inicioSesion'])) {
 				<input type="submit" name="inicioSesion" value="Iniciar sesion">
 				<hr>
 				<a href='registro.php'>Registrarse</a>
-				<a href='invitado.php'>Entrar como invitado</a>
+				<a href='./cliente/insertar.php'>Entrar como invitado</a>
 				<input type="hidden" name="sesion">
 			</form>
 		</fieldset>

@@ -19,7 +19,7 @@
         $datos_tecnicos = file_get_contents("datos_tecnicos.json");
         $json_tecnicos = json_decode($datos_tecnicos, true);
         return $json_tecnicos;
-        }
+    }
 
     function existeLogin($login) {
         $datos_tecnicos = obtenerDatosJson();
@@ -65,14 +65,18 @@
 
     function obtenerPassword($login) {
         $datos_tecnicos = obtenerDatosJson();
-        $posicion = array_search($login, $datos_tecnicos);
-        $tecnicosPosicon = $datos_tecnicos[$posicion];
-        return $tecnicosPosicon['password'];
+		foreach ($datos_tecnicos as $clave => $valor)
+		{
+			if ($valor['login'] == $login)
+			{
+				return ($valor['password']);
+			}
+		}
     }
 
     function comprobarInicioSesion($login, $password)
     {
-        $password_json = obtenerPassword($login);
+		$password_json = obtenerPassword($login);
         if (password_verify($password, $password_json)) {
             return true;
         } else {
