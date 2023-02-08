@@ -5,5 +5,19 @@
         "login": "jesus29",
         "password": "XCm4cvZrKhNrs",
         "email": "jesus29@gmail.com"
+    },
+    {
+        "nombre": "jesus",
+        "apellidos": "asa",
+        "login": "jesus291",
+        "password": "XCm4cvZrKhNrs",
+        "email": "jesus239@gmail.com"
+    },
+    {
+        "nombre": "mario",
+        "apellidos": "sanchez",
+        "login": "mario12",
+        "password": "XCusDbVAOxsis",
+        "email": "mario@gmail.com"
     }
 ]
