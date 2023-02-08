@@ -14,10 +14,10 @@ if (isset($_POST['inicioSesion'])) {
 		if (existeLogin($login)) {
 			if (comprobarInicioSesion($login, $password)) {
 				session_start();
-				$_SESSION['usuario'] = $login;
-				$_SESSION['hora'] = date("H:i", time());
-				//Nos redirige a la pagina usuario
-				header("Location:tecnico/gestion.php");
+                $_SESSION['usuario']=$login;
+                $_SESSION['hora']=date("H:i",time());
+                //Nos redirige a la pagina usuario
+                header("Location:./tecnico/gestion.php");
 			} else {
 				$error = "Datos incorrectos";
 			}
@@ -74,8 +74,17 @@ if (isset($_POST['inicioSesion'])) {
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</form>
+				<div class="input-labeled">
+					<label>Contraseña:</label>
+					<input type="password" name="password" required maxlength="20">
+				</div>
+				<input type="submit" name="inicioSesion" value="Iniciar sesion">
+				<hr>
+				<a href='registro.php'>Registrarse</a>
+				<a href='./cliente/insertar.php'>Entrar como invitado</a>
+				<input type="hidden" name="sesion">
+			</form>
+		</fieldset>
+	</main>
 </body>
 </html>
