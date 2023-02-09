@@ -14,10 +14,10 @@ if (isset($_POST['inicioSesion'])) {
 		if (existeLogin($login)) {
 			if (comprobarInicioSesion($login, $password)) {
 				session_start();
-                $_SESSION['usuario']=$login;
-                $_SESSION['hora']=date("H:i",time());
-                //Nos redirige a la pagina usuario
-                header("Location:./tecnico/gestion.php");
+				$_SESSION['usuario'] = $login;
+				$_SESSION['hora'] = date("H:i", time());
+				//Nos redirige a la pagina usuario
+				header("Location:./tecnico/gestion.php");
 			} else {
 				$error = "Datos incorrectos";
 			}
@@ -33,8 +33,9 @@ if (isset($_POST['inicioSesion'])) {
 
 <head>
 	<meta charset="UTF-8">
-	<title>Contabilidad Personal</title>
+	<title>Tienda Moviles</title>
 	<link rel="stylesheet" type="text/css" href="css/inicio.css">
+	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -51,11 +52,11 @@ if (isset($_POST['inicioSesion'])) {
 						</div>
 						<div class="group">
 							<label for="pass" class="label">Contraseña</label>
-							<input id="pass" type="password" name="password" required maxlength="20" class="input" data-type="password">
+							<input id="pass" type="password" name="password" required maxlength="20" class="input">
 						</div>
 						<div class="group">
-							<input id="check" type="checkbox" class="check" checked>
-							<label for="check"><span class="icon"></span> Mostrar contraseña</label>
+							<input id="check" type="checkbox" class="check">
+							<label for="check" id="mostrar"><span class="icon"></span> Mostrar contraseña</label>
 						</div>
 						<div class="group">
 							<input type="submit" class="button" name="inicioSesion" value="Inicar Sesion">
@@ -70,21 +71,24 @@ if (isset($_POST['inicioSesion'])) {
 						<div class="hr">
 						</div>
 						<div class="foot-lnk">
-							<a href="#forgot">¿Has olvidado tu contraseña?</a>
+							<a href="cliente/insertar.php">Entrar como invitado</a>
 						</div>
 					</div>
 				</div>
-				<div class="input-labeled">
-					<label>Contraseña:</label>
-					<input type="password" name="password" required maxlength="20">
-				</div>
-				<input type="submit" name="inicioSesion" value="Iniciar sesion">
-				<hr>
-				<a href='registro.php'>Registrarse</a>
-				<a href='./cliente/insertar.php'>Entrar como invitado</a>
-				<input type="hidden" name="sesion">
-			</form>
-		</fieldset>
-	</main>
+			</div>
+		</div>
+	</form>
+	<script>
+		document.getElementById("check").addEventListener("click", mostrarContrasena);
+		function mostrarContrasena(){
+			var tipo = document.getElementById("pass");
+			if(document.getElementById('check').checked) {
+				tipo.type = "text";
+			} else{
+				tipo.type = "password";
+			}
+ 		}
+	</script>
 </body>
+
 </html>

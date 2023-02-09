@@ -15,20 +15,22 @@
         file_put_contents('datos_tecnicos.json', $data);
     }
 
-    function obtenerDatosJson(){
+    function obtenerTecnicosJson(){
         $datos_tecnicos = file_get_contents("datos_tecnicos.json");
         $json_tecnicos = json_decode($datos_tecnicos, true);
         return $json_tecnicos;
     }
 
     function existeLogin($login) {
-        $datos_tecnicos = obtenerDatosJson();
-        foreach($datos_tecnicos as $tecnicos) {
-            if($tecnicos['login'] == $login) {
-                return true;
+        $datos_tecnicos = obtenerTecnicosJson();
+        if (count($datos_tecnicos) != 0) {
+            foreach($datos_tecnicos as $tecnicos) {
+                if($tecnicos['login'] == $login) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
     }
 
     //Metodo para validar la contraseña
@@ -64,7 +66,7 @@
     }
 
     function obtenerPassword($login) {
-        $datos_tecnicos = obtenerDatosJson();
+        $datos_tecnicos = obtenerTecnicosJson();
 		foreach ($datos_tecnicos as $clave => $valor)
 		{
 			if ($valor['login'] == $login)
@@ -82,4 +84,20 @@
         } else {
             return false;
         }
+    }
+
+    function obtenerIncidenciasJson() {
+        $incidencias = file_get_contents("incidencias.json");
+        $json_tecnicos = json_decode($incidencias, true);
+        return $json_tecnicos;
+    }
+
+    function mostrarIncidencias() {
+        $incidencias = obtenerIncidenciasJson();
+        $tabla = "<table><tr><th>Nombre</th><th>Email</th><th>Problema del móvil</th><th>Fecha</th>Técnico</th><th>Resuelto</th><th></th><th></th></tr>";
+        foreach($incidencias as $incidencia) {
+            $tabla.="<tr><td>".$incidencia['nombre']."<td><td>".$incidencia['email']."<td><td>".$incidencia['problema']."<td><td>".$incidencia['fecha']."<td><td>".$incidencia['tecnico']."<td><td>".$incidencia['resuelto']."<td><a href='editarIncidencia.php?id=$incidencia[id]><input type='button' name='editar' value='jesus'></a><td><td><a href='borrarIncidencia.php?id=$incidencia[id]><input type='button' name='borrar'>../img/borrar.png</a><td></tr>";
+        }
+        $tabla.="</table>";
+        return $tabla;
     }

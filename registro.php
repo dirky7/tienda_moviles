@@ -42,17 +42,13 @@ if (isset($_POST['registro'])) {
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- Desarrollo Web en Entorno Servidor -->
-<!-- Tema 3 : Desarrollo de aplicaciones web con PHP -->
-<!-- Tarea 3, Foro: registro.php -->
 <html>
-
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Foro DWES</title>
     <link href="css/inicio.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
-
 <body>
     <form method="post">
         <div class="login-wrap">
