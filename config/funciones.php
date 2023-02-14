@@ -174,24 +174,20 @@
 							<td>".$incidencia['fecha']."</td>
 							<td>".$incidencia['tecnico']."</td>
 							<td>".$incidencia['resuelto']."</td>
-                			<td>
+                			<td>";
+								
+				if ( $incidencia['tecnico'] == "")
+				{
+					$tabla .= "
+							<td>
 								<a href='gestion.php?id=$incidencia[id]'>
-									<input type='image' src='../img/aceptar.png' id='aceptar' name='aceptar'/>
-                				</a>
-							</td>
-                			<td>
-								<a href='editarIncidencia.php?id=$incidencia[id]'>
-									<img src='../img/lapiz.png' alt=''>
+								<input type='image' src='../img/aceptar.png' id='aceptar' name='aceptar'/>
 								</a>
 							</td>
-                			<td>
-								<a href='borrarIncidencia.php?id=$incidencia[id]'>
-									<img src='../img/borrar.png' alt=''>
-								</a>
-							</td>
-               			</tr>";
+					";
+				}
             }
-            $tabla.="
+            $tabla.="	</tr>
 					</table>
 				</div>";
             return $tabla;
