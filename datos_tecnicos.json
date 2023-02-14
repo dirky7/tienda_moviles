@@ -19,5 +19,12 @@
         "login": "mario12",
         "password": "XCusDbVAOxsis",
         "email": "mario@gmail.com"
+    },
+    {
+        "nombre": "Daniel",
+        "apellidos": "Hurtado",
+        "login": "dani",
+        "password": "XC1s9g8ZHQy.E",
+        "email": "dani@gmail.com"
     }
 ]
