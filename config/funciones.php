@@ -92,12 +92,72 @@
         return $json_tecnicos;
     }
 
+    function comprobarUsuarioTieneIncidencia() {
+        $incidencias = obtenerIncidenciasJson();
+        foreach($incidencias as $incidencia) {
+            if($incidencia['tecnico'] == $_SESSION['usuario'] && $incidencia['resuelto'] == "No")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function mostrarIncidencias() {
         $incidencias = obtenerIncidenciasJson();
-        $tabla = "<table><tr><th>Nombre</th><th>Email</th><th>Problema del móvil</th><th>Fecha</th>Técnico</th><th>Resuelto</th><th></th><th></th></tr>";
-        foreach($incidencias as $incidencia) {
-            $tabla.="<tr><td>".$incidencia['nombre']."<td><td>".$incidencia['email']."<td><td>".$incidencia['problema']."<td><td>".$incidencia['fecha']."<td><td>".$incidencia['tecnico']."<td><td>".$incidencia['resuelto']."<td><a href='editarIncidencia.php?id=$incidencia[id]><input type='button' name='editar' value='jesus'></a><td><td><a href='borrarIncidencia.php?id=$incidencia[id]><input type='button' name='borrar'>../img/borrar.png</a><td></tr>";
+        if(comprobarUsuarioTieneIncidencia()) {
+            $tabla = "<div class='table-responsive'> <table  class='table table-dark table-hover'><tr><th>Nombre</th><th>Email</th><th>Problema del móvil</th><th>Fecha</th><th>Técnico</th><th>Resuelto</th><th></th><th></th><th></th></tr>";
+            foreach($incidencias as $incidencia) {
+                if($incidencia['tecnico'] == $_SESSION['usuario']) {
+                    $tabla.="<tr><td>".$incidencia['nombre']."</td>
+                    <td>".$incidencia['email']."</td>
+                    <td>".$incidencia['problema']."</td>
+                    <td>".$incidencia['fecha']."</td>
+                    <td>".$incidencia['tecnico']."</td>
+                    <td>".$incidencia['resuelto']."</td>
+                    <td><a href='gestion.php?id=$incidencia[id]'><input type='image' src='../img/finalizar.png' id='aceptar' name='aceptar'/></a></td>
+                    <td><a href='editarIncidencia.php?id=$incidencia[id]'><img src='../img/lapiz.png' alt=''></a></td>
+                    <td><a href='borrarIncidencia.php?id=$incidencia[id]'><img src='../img/borrar.png' alt=''></a></td>
+                    </tr>";
+                }
+            }
+                $tabla.="</table></div>";
+                return $tabla;
+        } else {
+            $tabla = "<div class='table-responsive'> <table  class='table table-dark table-hover'><tr><th>Nombre</th><th>Email</th><th>Problema del móvil</th><th>Fecha</th><th>Técnico</th><th>Resuelto</th><th></th><th></th><th></th></tr>";
+            foreach($incidencias as $incidencia) {
+                $tabla.="<tr><td>".$incidencia['nombre']."</td>
+                <td>".$incidencia['email']."</td>
+                <td>".$incidencia['problema']."</td>
+                <td>".$incidencia['fecha']."</td>
+                <td>".$incidencia['tecnico']."</td>
+                <td>".$incidencia['resuelto']."</td>
+                <td><a href='gestion.php?id=$incidencia[id]'><input type='image' src='../img/aceptar.png' id='aceptar' name='aceptar'/>
+                </a></td>
+                <td><a href='editarIncidencia.php?id=$incidencia[id]'><img src='../img/lapiz.png' alt=''></a></td>
+                <td><a href='borrarIncidencia.php?id=$incidencia[id]'><img src='../img/borrar.png' alt=''></a></td>
+                </tr>";
+            }
+            $tabla.="</table></div>";
+            return $tabla;
         }
-        $tabla.="</table>";
-        return $tabla;
+    }
+
+    function comprobarSiEstaLogeado() {
+        if (!isset($_SESSION['usuario'])) {
+            die("Error debes <a href='../index.php'>identificarse</a>");
+        }
+    }
+
+    function anyadirTecnicoIncidencia($id) {
+        $datos_tecnicos = obtenerIncidenciasJson();
+		foreach ($datos_tecnicos as $clave => $valor)
+		{
+			if ($valor['id'] == $id)
+			{
+				$datos_tecnicos[$clave]['tecnico'] = $_SESSION['usuario'];
+			}
+		}
+        $data = json_encode($datos_tecnicos, JSON_PRETTY_PRINT);
+        file_put_contents('incidencias.json', $data);
     }

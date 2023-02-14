@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "nombre": "Juan Ramirez Gonzalez",
+        "email": "juan281@gmail.com",
+        "problema": "Panntalla rota",
+        "fecha": "15\/10\/2020",
+        "tecnico": "jesus29",
+        "precio": "",
+        "res_precio": "",
+        "resuelto": "No"
+    },
+    {
+        "id": 2,
+        "nombre": "Pepe Dominguez Casta\u00f1o",
+        "email": "pepe120@gmail.com",
+        "problema": "No carga",
+        "fecha": "5\/08\/2022",
+        "tecnico": "jesus291",
+        "Precio": "",
+        "Resumen Precio": "",
+        "resuelto": "No"
+    }
+]

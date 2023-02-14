@@ -24,8 +24,8 @@ if (isset($_POST['registro'])) {
                 if (validar_email($email) == "") {
                     anyadirTecnicoJson($nombre, $apellidos, $login, $password, $email);
                     $anuncio = "Usuario registrado correctamente";
-                    echo ("<meta http-equiv='refresh' content='1;url=index.php'>");
-                    //si la validacion del email es incorrecta
+                    header("Location:index.php");
+                //si la validacion del email es incorrecta
                 } else {
                     $error = validar_email($email);
                 }

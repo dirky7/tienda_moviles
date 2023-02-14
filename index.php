@@ -17,7 +17,7 @@ if (isset($_POST['inicioSesion'])) {
 				$_SESSION['usuario'] = $login;
 				$_SESSION['hora'] = date("H:i", time());
 				//Nos redirige a la pagina usuario
-				header("Location:./tecnico/gestion.php");
+				header("Location:inicio.php");
 			} else {
 				$error = "Datos incorrectos";
 			}
@@ -57,7 +57,7 @@ if (isset($_POST['inicioSesion'])) {
 						<div class="group">
 							<input id="check" type="checkbox" class="check">
 							<label for="check" id="mostrar"><span class="icon"></span> Mostrar contraseña</label>
-						</div>
+					</div>
 						<div class="group">
 							<input type="submit" class="button" name="inicioSesion" value="Inicar Sesion">
 						</div>
