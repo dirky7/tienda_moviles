@@ -85,7 +85,7 @@ comprobarSiEstaLogeado();
 						</li>
 						<li class='card'>
 							<img src='https://images.unsplash.com/photo-1613230485186-2e7e0fca1253?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHw&ixlib=rb-1.2.1&q=80&w=400' alt=''>
-							<a href=''>
+							<a href='./usuarios.php'>
 								<input type='button' value='Gestionar Usuarios'>
 							</a>
 						</li>";

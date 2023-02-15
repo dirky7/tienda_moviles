@@ -92,6 +92,13 @@
         return $json_tecnicos;
     }
 
+	function obtenerUsuarios()
+	{
+		$tecnicos = file_get_contents("datos_tecnicos.json");
+        $json_tecnicos = json_decode($tecnicos, true);
+        return $json_tecnicos;
+	}
+
     function comprobarUsuarioTieneIncidencia() {
         $incidencias = obtenerIncidenciasJson();
         foreach($incidencias as $incidencia) {
@@ -102,6 +109,59 @@
         }
         return false;
     }
+
+
+	function mostrarUsuarios()
+	{
+		$tecnicos = obtenerUsuarios();
+		$tabla = "
+				<div class='table-responsive'>
+					<table  class='table table-dark table-hover'>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellidos</th>
+							<th>Login</th>
+							<th>Email</th>
+							<th>Autorización</th>
+						</tr>";
+            foreach($tecnicos as $tecnico)
+			{
+                $tabla.="
+						<tr>
+							<td>".$tecnico['nombre']."</td>
+                    		<td>".$tecnico['apellidos']."</td>
+		                    <td>".$tecnico['login']."</td>
+                    		<td>".$tecnico['email']."</td>";
+				if ($tecnico['autorizado'] == "si")
+				{
+						$tabla.= "
+							<td>
+								<select name='' id=''>
+									<option value='si' selected>Si</option>
+									<option value='no'>No</option>
+								</select>
+							</td>
+						";
+				}
+				else
+				{
+					$tabla.= "
+							<td>
+								<select name='' id=''>
+									<option value='si'>Si</option>
+									<option value='no' selected>No</option>
+								</select>
+							</td>
+						";
+				}
+                    
+                $tabla .= "</tr>";
+            }
+			$tabla.="
+					</table>
+				</div>";
+			return $tabla;
+	}
 
     function mostrarIncidencias() {
         $incidencias = obtenerIncidenciasJson();
