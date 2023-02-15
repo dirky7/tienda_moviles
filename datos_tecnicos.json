@@ -4,34 +4,39 @@
         "apellidos": "Sanchez",
         "login": "jesus29",
         "password": "XCm4cvZrKhNrs",
-        "email": "jesus29@gmail.com"
+        "email": "jesus29@gmail.com",
+		"autorizado": "si"
     },
     {
         "nombre": "jesus",
         "apellidos": "asa",
         "login": "jesus291",
         "password": "XCm4cvZrKhNrs",
-        "email": "jesus239@gmail.com"
+        "email": "jesus239@gmail.com",
+		"autorizado": "si"
     },
     {
         "nombre": "mario",
         "apellidos": "sanchez",
         "login": "mario12",
         "password": "XCusDbVAOxsis",
-        "email": "mario@gmail.com"
+        "email": "mario@gmail.com",
+		"autorizado": "no"
     },
     {
         "nombre": "Daniel",
         "apellidos": "Hurtado",
         "login": "dani",
         "password": "XC1s9g8ZHQy.E",
-        "email": "dani@gmail.com"
+        "email": "dani@gmail.com",
+		"autorizado": "si"
     },
     {
         "nombre": "admin",
         "apellidos": "admin",
         "login": "admin",
         "password": "XCS9A5lQczAxo",
-        "email": "admin@gmail.com"
+        "email": "admin@gmail.com",
+		"autorizado": "si"
     }
 ]
