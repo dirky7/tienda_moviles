@@ -76,8 +76,12 @@ if (isset($_POST['registro'])) {
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Repite la contraseña</label>
-                            <input id="pass" type="password" class="input" data-type="password" name="password2" maxlength="50" required>
+                            <input id="pass2" type="password" class="input" data-type="password" name="password2" maxlength="50" required>
                         </div>
+						<div class="group">
+							<input id="check" type="checkbox" class="check">
+							<label for="check" id="mostrar"><span class="icon"></span> Mostrar contraseña</label>
+						</div>
                         <div class="group">
                             <label for="pass" class="label">Email</label>
                             <input id="pass" type="text" class="input" name="email" maxlength="50" value="<?php if (isset($_POST['email']) && (validar_email($email) == "")) echo $_POST['email']; ?>" required>
@@ -85,18 +89,32 @@ if (isset($_POST['registro'])) {
                         <div class="group">
                             <input type="submit" class="button" name="registro" value="Crear cuenta">
                         </div>
-                        <div class="error">
-							<?php
-							if (isset($error)) {
-								echo "<div class='error'>$error</div>";
-							}
-							?>
-						</div>
+						<?php
+						if (isset($error)) {
+							echo "<div class='error'>$error</div>";
+						}
+						?>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </form>
+	<script>
+		document.getElementById("check").addEventListener("click", mostrarContrasena);
+		function mostrarContrasena(){
+			var tipo = document.getElementById("pass");
+			if(document.getElementById('check').checked) {
+				tipo.type = "text";
+			} else{
+				tipo.type = "password";
+			}
+			var tipo2 = document.getElementById("pass2");
+			if(document.getElementById('check').checked) {
+				tipo2.type = "text";
+			} else{
+				tipo2.type = "password";
+			}
+ 		}
+	</script>
 </body>
 </html>
