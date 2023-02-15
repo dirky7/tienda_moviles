@@ -26,5 +26,12 @@
         "login": "dani",
         "password": "XC1s9g8ZHQy.E",
         "email": "dani@gmail.com"
+    },
+    {
+        "nombre": "admin",
+        "apellidos": "admin",
+        "login": "admin",
+        "password": "XCS9A5lQczAxo",
+        "email": "admin@gmail.com"
     }
 ]

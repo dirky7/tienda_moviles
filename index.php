@@ -55,7 +55,7 @@ if (isset($_POST['inicioSesion'])) {
 						<div class="group">
 							<input id="check" type="checkbox" class="check">
 							<label for="check" id="mostrar"><span class="icon"></span> Mostrar contraseña</label>
-					</div>
+						</div>
 						<div class="group">
 							<input type="submit" class="button" name="inicioSesion" value="Inicar Sesion">
 						</div>
