@@ -115,6 +115,8 @@
 							<th>Problema del móvil</th>
 							<th>Fecha</th>
 							<th>Técnico</th>
+                            <th>Precio</th>
+							<th>Resumen Precio</th>
 							<th>Resuelto</th>
 							<th></th>
 							<th></th>
@@ -129,10 +131,12 @@
                     		<td>".$incidencia['problema']."</td>
 		                    <td>".$incidencia['fecha']."</td>
                     		<td>".$incidencia['tecnico']."</td>
+                    		<td>".$incidencia['precio']."</td>
+                            <td>".$incidencia['resumen_precio']."</td>
                     		<td>".$incidencia['resuelto']."</td>
 		                    <td>
-								<a href='gestion.php?id=$incidencia[id]'>
-									<input type='image' src='../img/finalizar.png' id='aceptar' name='aceptar'/>
+								<a href='gestion.php?fin=$incidencia[id]'>
+                                    <input type='image' src='../img/finalizar.png' id='aceptar' name='aceptar' value=''/>
 								</a>
 							</td>
 		                    <td>
@@ -211,6 +215,33 @@
 			if ($valor['id'] == $id)
 			{
 				$datos_tecnicos[$clave]['tecnico'] = $_SESSION['usuario'];
+			}
+		}
+        $data = json_encode($datos_tecnicos, JSON_PRETTY_PRINT);
+        file_put_contents('incidencias.json', $data);
+    }
+
+    function comprobarNoHayDatosVacios($id) {
+        $datos_tecnicos = obtenerIncidenciasJson();
+		foreach ($datos_tecnicos as $clave => $valor)
+		{
+			if ($valor['id'] == $id )
+			{
+                if($valor['precio'] == 0  && $valor['resumen_precio'] != "") {
+                    return true;
+                }
+			}
+		}
+        return false;
+    }
+
+    function actualizarIncidenciaResuelta($id) {
+        $datos_tecnicos = obtenerIncidenciasJson();
+		foreach ($datos_tecnicos as $clave => $valor)
+		{
+			if ($valor['id'] == $id)
+			{
+				$datos_tecnicos[$clave]['resuelto'] = "Si";
 			}
 		}
         $data = json_encode($datos_tecnicos, JSON_PRETTY_PRINT);

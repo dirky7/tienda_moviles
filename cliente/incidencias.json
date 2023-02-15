@@ -6,9 +6,9 @@
         "problema": "Panntalla rota",
         "fecha": "15\/10\/2020",
         "tecnico": "jesus29",
-        "precio": "",
-        "res_precio": "",
-        "resuelto": "No"
+        "precio": 0,
+        "resumen_precio": "as",
+        "resuelto": "Si"
     },
     {
         "id": 2,
@@ -16,9 +16,9 @@
         "email": "pepe120@gmail.com",
         "problema": "No carga",
         "fecha": "5\/08\/2022",
-        "tecnico": "jesus29",
-        "Precio": "",
-        "Resumen Precio": "",
+        "tecnico": "",
+        "precio": 0,
+        "resumen_precio": "",
         "resuelto": "No"
     }
 ]

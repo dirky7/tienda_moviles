@@ -30,14 +30,12 @@ if (isset($_POST['inicioSesion'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>Tienda Moviles</title>
 	<link rel="stylesheet" type="text/css" href="css/inicio.css">
 	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
-
 <body>
 	<form method="post">
 		<div class="login-wrap">
@@ -71,7 +69,7 @@ if (isset($_POST['inicioSesion'])) {
 						<div class="hr">
 						</div>
 						<div class="foot-lnk">
-							<a href="cliente/insertar.php">Entrar como invitado</a>
+							<a href="inicio.php">Entrar como invitado</a>
 						</div>
 					</div>
 				</div>
@@ -90,5 +88,4 @@ if (isset($_POST['inicioSesion'])) {
  		}
 	</script>
 </body>
-
 </html>
