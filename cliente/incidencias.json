@@ -16,12 +16,9 @@
         "email": "pepe120@gmail.com",
         "problema": "No carga",
         "fecha": "5\/08\/2022",
-        "tecnico": "",
-        "precio": 0,
-        "resumen_precio": "",
         "tecnico": "dani",
-        "Precio": "",
-        "Resumen Precio": "",
+        "precio": 0,
+        "resumen_precio": "ff",
         "resuelto": "No"
     },
     {
@@ -30,9 +27,9 @@
         "email": "pepe120@gmail.com",
         "problema": "No carga",
         "fecha": "5\/08\/2022",
-        "tecnico": "",
-        "Precio": "",
-        "Resumen Precio": "",
-        "resuelto": "No"
+        "tecnico": "jesus29",
+        "precio": 10,
+        "resumen_precio": "ss",
+        "resuelto": "Si"
     }
 ]

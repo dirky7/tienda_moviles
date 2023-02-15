@@ -12,6 +12,7 @@ if(isset($_GET['fin'])) {
     if(comprobarNoHayDatosVacios($_GET['fin'])) {
         echo $_GET['fin'];
         actualizarIncidenciaResuelta($_GET['fin']);
+        moverIncidenciasResueltas();
     } else {
         echo "Datos vacios";
     }

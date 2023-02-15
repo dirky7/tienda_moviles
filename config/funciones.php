@@ -179,7 +179,7 @@
 							<td>".$incidencia['tecnico']."</td>
 							<td>".$incidencia['resuelto']."</td>
                 			<td>";
-								
+
 				if ( $incidencia['tecnico'] == "")
 				{
 					$tabla .= "
@@ -223,7 +223,7 @@
 		{
 			if ($valor['id'] == $id )
 			{
-                if($valor['precio'] == 0  && $valor['resumen_precio'] != "") {
+                if($valor['precio'] > 0  && $valor['resumen_precio'] != "") {
                     return true;
                 }
 			}
@@ -242,4 +242,19 @@
 		}
         $data = json_encode($datos_tecnicos, JSON_PRETTY_PRINT);
         file_put_contents('incidencias.json', $data);
+    }
+
+    function moverIncidenciasResueltas() {
+        $datos_tecnicos = obtenerIncidenciasJson();
+        $incidencia_resueltas = [];
+		foreach ($datos_tecnicos as $incidencia)
+		{
+			if ($incidencia['resuelto'] == "Si")
+			{
+                $incidencia_resueltas = $incidencia;
+            }
+		}
+
+        $data = json_encode($incidencia_resueltas, JSON_PRETTY_PRINT);
+        file_put_contents('incidencias_resueltas.json', $data);
     }
