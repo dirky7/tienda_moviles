@@ -9,11 +9,25 @@
         'login' => $login,
         'password' => crypt($password, "XC"),
         'email' => $email,
+		'autorizado' => 'no'
         );
         $data[] = $add_arr;
         $data = json_encode($data, JSON_PRETTY_PRINT);
         file_put_contents('datos_tecnicos.json', $data);
     }
+
+	function autorizarTecnico($login)
+	{
+		$tecnicos = obtenerUsuarios();
+		foreach ($tecnicos as $tecnico)
+		{
+			if ($tecnico['login'] == $login && $tecnico['autorizado'] == "no")
+			{
+				return (true);
+			}
+			return (false);
+		}
+	}
 
     function obtenerTecnicosJson(){
         $datos_tecnicos = file_get_contents("datos_tecnicos.json");

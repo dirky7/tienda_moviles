@@ -43,7 +43,7 @@ comprobarSiEstaLogeado();
                         <a class="nav-link" href="#">contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../logoff.php">Salir</a>
+                        <a class="nav-link" href="./logoff.php">Salir</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
@@ -58,16 +58,13 @@ comprobarSiEstaLogeado();
     </nav>
 	<main>
 		<aside>
-            <?php
-            echo mostrarUsuarios();
-            ?>
+			<form action="">
+				<?php
+				echo mostrarUsuarios();
+				?>
 
-			<div>
-				<form action="">
-					<input type="submit" value="Guardar cambios">
-				</form>
-			</div>
-
+				<input type="submit" value="Guardar cambios">
+			</form>
 		</aside>
 	</main>
 </body>

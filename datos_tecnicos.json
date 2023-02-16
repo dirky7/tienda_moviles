@@ -5,7 +5,7 @@
         "login": "jesus29",
         "password": "XCm4cvZrKhNrs",
         "email": "jesus29@gmail.com",
-		"autorizado": "si"
+        "autorizado": "si"
     },
     {
         "nombre": "jesus",
@@ -13,7 +13,7 @@
         "login": "jesus291",
         "password": "XCm4cvZrKhNrs",
         "email": "jesus239@gmail.com",
-		"autorizado": "si"
+        "autorizado": "si"
     },
     {
         "nombre": "mario",
@@ -21,7 +21,7 @@
         "login": "mario12",
         "password": "XCusDbVAOxsis",
         "email": "mario@gmail.com",
-		"autorizado": "no"
+        "autorizado": "no"
     },
     {
         "nombre": "Daniel",
@@ -29,7 +29,7 @@
         "login": "dani",
         "password": "XC1s9g8ZHQy.E",
         "email": "dani@gmail.com",
-		"autorizado": "si"
+        "autorizado": "si"
     },
     {
         "nombre": "admin",
@@ -37,6 +37,14 @@
         "login": "admin",
         "password": "XCS9A5lQczAxo",
         "email": "admin@gmail.com",
-		"autorizado": "si"
+        "autorizado": "si"
+    },
+    {
+        "nombre": "prueba",
+        "apellidos": "p1",
+        "login": "prueba",
+        "password": "XCQYH2E9R0Mdo",
+        "email": "p1@gmail.com",
+        "autorizado": "no"
     }
 ]
