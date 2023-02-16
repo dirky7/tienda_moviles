@@ -46,5 +46,13 @@
         "password": "XCQYH2E9R0Mdo",
         "email": "p1@gmail.com",
         "autorizado": "no"
+    },
+    {
+        "nombre": "Migue",
+        "apellidos": "Gomez",
+        "login": "migue",
+        "password": "XCm3lj.pBxZxg",
+        "email": "migue@gmail.com",
+        "autorizado": "si"
     }
 ]

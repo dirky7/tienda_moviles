@@ -2,7 +2,7 @@
 include("config/funciones.php");
 
 session_start();
-comprobarSiEstaLogeado();
+
 
 
 
