@@ -450,3 +450,40 @@
 			return "<p>No tienes incidencias resueltas</p>";
 		}
     }
+
+	function insertarIncidencia($nombre, $mail,$tecnico, $problema, $fecha){
+        //Obtengo el contenido del json
+        $data = file_get_contents('incidencias.json');
+        //Decodifico el json
+        $arrayexistente = json_decode($data, true);
+        //Creo un contador para el id segun los archivos del json para asignar una id
+       $cont=count($arrayexistente);
+       $id=$cont+1;
+        //Creo el array con los datos
+        $datos = array(
+        'id' =>$id,
+        'nombre' => $nombre,
+        'email' => $mail,
+        'tecnico' => $tecnico,
+        'problema' => $problema,
+        'fecha' => $fecha,
+        'resuelto' => "",
+        'precio' =>"",
+        'observaciones' =>"",
+        'fechaActu'=>"",
+
+        );
+       
+        //Agrego los datos al array
+        array_push($arrayexistente, $datos);
+        //Codifico el json
+	    $nuevosdatos=json_encode($arrayexistente);
+		
+
+		// Guardar el array actualizado en el archivo JSON
+		file_put_contents('incidencias.json', $nuevosdatos);
+    }
+
+    function actualizarIncidencia(){
+
+    }
