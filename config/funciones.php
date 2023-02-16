@@ -115,13 +115,13 @@
 
     function comprobarUsuarioTieneIncidencia() {
         $incidencias = obtenerIncidenciasJson();
-        foreach($incidencias as $incidencia) {
-            if($incidencia['tecnico'] == $_SESSION['usuario'] && $incidencia['resuelto'] == "No")
-            {
-                return true;
-            }
-        }
-        return false;
+		foreach($incidencias as $incidencia) {
+			if($incidencia['tecnico'] == $_SESSION['usuario'] && $incidencia['resuelto'] == "No")
+			{
+				return true;
+			}
+		}
+		return false;
     }
 
 
@@ -168,7 +168,7 @@
 							</td>
 						";
 				}
-                    
+
                 $tabla .= "</tr>";
             }
 			$tabla.="
@@ -318,17 +318,135 @@
         file_put_contents('incidencias.json', $data);
     }
 
-    function moverIncidenciasResueltas() {
+	function obtenerIncidenciasResueltasJson() {
+        $incidencias_resueltas = file_get_contents("incidencias_resueltas.json");
+        $json_resueltas = json_decode($incidencias_resueltas, true);
+        return $json_resueltas;
+    }
+
+	function comprbarSiNoExisteIncidencia($id) {
+		$incidencia_resueltas = obtenerIncidenciasResueltasJson();
+		if (count($incidencia_resueltas) > 0) {
+			foreach ($incidencia_resueltas as $clave => $valor) {
+				if ($valor['id'] != $id) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+    function moverIncidenciasResueltas($id) {
         $datos_tecnicos = obtenerIncidenciasJson();
-        $incidencia_resueltas = [];
-		foreach ($datos_tecnicos as $incidencia)
+        $incidencia_resueltas = obtenerIncidenciasResueltasJson();
+		foreach ($datos_tecnicos as $clave => $valor)
 		{
-			if ($incidencia['resuelto'] == "Si")
+			if ($valor['id'] == $id && $valor['resuelto'] == "Si")
 			{
-                $incidencia_resueltas = $incidencia;
+				if(comprbarSiNoExisteIncidencia($id)) {
+					array_push($incidencia_resueltas, $valor);
+				}
             }
 		}
-
         $data = json_encode($incidencia_resueltas, JSON_PRETTY_PRINT);
         file_put_contents('incidencias_resueltas.json', $data);
+		borrarIncidencia($id);
+    }
+
+
+	function borrarIncidencia($id) {
+		$datos_tecnicos = obtenerIncidenciasJson();
+		foreach ($datos_tecnicos as $clave => $valor)
+		{
+			if ($valor['id'] == $id  && $valor['resuelto'] == "Si")
+			{
+				unset($datos_tecnicos[$clave]);
+			}
+		}
+		$datos_tecnicos = array_values($datos_tecnicos);
+		$data = json_encode($datos_tecnicos, JSON_PRETTY_PRINT);
+        file_put_contents('incidencias.json', $data);
+	}
+
+	function mostrarIncidenciasResueltas() {
+        $incidencias = obtenerIncidenciasResueltasJson();
+            $tabla = "
+				<div class='table-responsive'>
+					<table  class='table table-dark table-hover'>
+						<tr>
+							<th>Nombre</th>
+							<th>Email</th>
+							<th>Problema del móvil</th>
+							<th>Fecha</th>
+							<th>Técnico</th>
+                            <th>Precio</th>
+							<th>Resumen Precio</th>
+							<th>Resuelto</th>
+						</tr>";
+            foreach($incidencias as $incidencia) {
+                    $tabla.="
+						<tr>
+							<td>".$incidencia['nombre']."</td>
+                    		<td>".$incidencia['email']."</td>
+                    		<td>".$incidencia['problema']."</td>
+		                    <td>".$incidencia['fecha']."</td>
+                    		<td>".$incidencia['tecnico']."</td>
+                    		<td>".$incidencia['precio']."</td>
+                            <td>".$incidencia['resumen_precio']."</td>
+                    		<td>".$incidencia['resuelto']."</td>
+                    	</tr>";
+                }
+                $tabla.="</table></div>";
+                return $tabla;
+    }
+
+	function comprobarUsuarioTieneIncidenciaResuelta() {
+        $incidencias = obtenerIncidenciasResueltasJson();
+		foreach($incidencias as $incidencia) {
+			if($incidencia['tecnico'] == $_SESSION['usuario'])
+			{
+				return true;
+			}
+		}
+		return false;
+    }
+
+	function mostrarIncidenciasResueltasUsuario() {
+        $incidencias = obtenerIncidenciasResueltasJson();
+		if(comprobarUsuarioTieneIncidenciaResuelta()) {
+            $tabla = "
+				<div class='table-responsive'>
+					<table  class='table table-dark table-hover'>
+						<tr>
+							<th>Nombre</th>
+							<th>Email</th>
+							<th>Problema del móvil</th>
+							<th>Fecha</th>
+							<th>Técnico</th>
+                            <th>Precio</th>
+							<th>Resumen Precio</th>
+							<th>Resuelto</th>
+						</tr>";
+            foreach($incidencias as $incidencia) {
+				if($incidencia['tecnico'] == $_SESSION['usuario']) {
+                    $tabla.="
+						<tr>
+							<td>".$incidencia['nombre']."</td>
+                    		<td>".$incidencia['email']."</td>
+                    		<td>".$incidencia['problema']."</td>
+		                    <td>".$incidencia['fecha']."</td>
+                    		<td>".$incidencia['tecnico']."</td>
+                    		<td>".$incidencia['precio']."</td>
+                            <td>".$incidencia['resumen_precio']."</td>
+                    		<td>".$incidencia['resuelto']."</td>
+                    	</tr>";
+				}
+            }
+                $tabla.="</table></div>";
+                return $tabla;
+		} else {
+			return "<p>No tienes incidencias resueltas</p>";
+		}
     }

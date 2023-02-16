@@ -6,7 +6,7 @@
         "problema": "Panntalla rota",
         "fecha": "15\/10\/2020",
         "tecnico": "jesus29",
-        "precio": 0,
+        "precio": 20,
         "resumen_precio": "as",
         "resuelto": "Si"
     },
@@ -22,14 +22,14 @@
         "resuelto": "No"
     },
     {
-        "id": 3,
-        "nombre": "Pepe Dominguez Casta\u00f1o",
-        "email": "pepe120@gmail.com",
-        "problema": "No carga",
-        "fecha": "5\/08\/2022",
+        "id": 4,
+        "nombre": "Juan Castro",
+        "email": "jaun123@gmail.com",
+        "problema": "Cambiar bateria",
+        "fecha": "5\/05\/2022",
         "tecnico": "jesus29",
         "precio": 10,
-        "resumen_precio": "ss",
+        "resumen_precio": "dd",
         "resuelto": "Si"
     }
 ]

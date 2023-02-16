@@ -10,9 +10,8 @@ if(isset($_GET['id'])) {
 
 if(isset($_GET['fin'])) {
     if(comprobarNoHayDatosVacios($_GET['fin'])) {
-        echo $_GET['fin'];
         actualizarIncidenciaResuelta($_GET['fin']);
-        moverIncidenciasResueltas();
+        moverIncidenciasResueltas($_GET['fin']);
     } else {
         echo "Datos vacios";
     }
@@ -74,10 +73,19 @@ if(isset($_GET['fin'])) {
         </div>
     </nav>
 	<main>
+        <nav>
+            <ul class="menu">
+                <li><a href="">Incidencias</a></li>
+                <li><a href="">Incidencias Resueltas </a></li>
+                <li><a href="">Mis incidencias Resueltas</a></li>
+            </ul>
+        </nav>
 		<aside>
-            <?php
-            echo mostrarIncidencias();
-            ?>
+                <?php
+                echo mostrarIncidencias();
+                echo mostrarIncidenciasResueltas();
+                echo mostrarIncidenciasResueltasUsuario();
+                ?>
 
 
 		</aside>
