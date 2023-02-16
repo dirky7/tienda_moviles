@@ -17,9 +17,6 @@ if(isset($_GET['fin'])) {
     }
 }
 
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,19 +72,29 @@ if(isset($_GET['fin'])) {
 	<main>
         <nav>
             <ul class="menu">
-                <li><a href="">Incidencias</a></li>
-                <li><a href="">Incidencias Resueltas </a></li>
-                <li><a href="">Mis incidencias Resueltas</a></li>
+                <form action="" method="post">
+                    <li><input type="submit" value="Incidencias" name="incidencias"></li>
+                </form>
+                <form action="" method="post">
+                    <li><input type="submit" value="Incidencias Resueltas" name="incidencias_resueltas"></li>
+                </form>
+                <form action="" method="post">
+                    <li><input type="submit" value="Mis Incidencias Resueltas" name="mis_incidencias_resueltas"></li>
+                </form>
             </ul>
         </nav>
 		<aside>
-                <?php
+            <?php
+            if(isset($_POST['incidencias'])) {
                 echo mostrarIncidencias();
+            } elseif(isset($_POST['incidencias_resueltas'])) {
                 echo mostrarIncidenciasResueltas();
+            } elseif(isset($_POST['mis_incidencias_resueltas'])) {
                 echo mostrarIncidenciasResueltasUsuario();
-                ?>
-
-
+            } else {
+                echo mostrarIncidencias();
+            }
+            ?>
 		</aside>
 	</main>
 </body>

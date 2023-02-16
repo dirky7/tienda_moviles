@@ -179,97 +179,97 @@
 
     function mostrarIncidencias() {
         $incidencias = obtenerIncidenciasJson();
-        if(comprobarUsuarioTieneIncidencia()) {
-            $tabla = "
-				<div class='table-responsive'>
-					<table  class='table table-dark table-hover'>
-						<tr>
-							<th>Nombre</th>
-							<th>Email</th>
-							<th>Problema del móvil</th>
-							<th>Fecha</th>
-							<th>Técnico</th>
-                            <th>Precio</th>
-							<th>Resumen Precio</th>
-							<th>Resuelto</th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>";
-            foreach($incidencias as $incidencia) {
-                if($incidencia['tecnico'] == $_SESSION['usuario']) {
-                    $tabla.="
-						<tr>
-							<td>".$incidencia['nombre']."</td>
-                    		<td>".$incidencia['email']."</td>
-                    		<td>".$incidencia['problema']."</td>
-		                    <td>".$incidencia['fecha']."</td>
-                    		<td>".$incidencia['tecnico']."</td>
-                    		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumen_precio']."</td>
-                    		<td>".$incidencia['resuelto']."</td>
-		                    <td>
-								<a href='gestion.php?fin=$incidencia[id]'>
-                                    <input type='image' src='../img/finalizar.png' id='aceptar' name='aceptar' value=''/>
-								</a>
-							</td>
-		                    <td>
-								<a href='editarIncidencia.php?id=$incidencia[id]'>
-									<img src='../img/lapiz.png' alt=''>
+		if(count($incidencias) > 0) {
+			if(comprobarUsuarioTieneIncidencia()) {
+				$tabla = "
+					<div class='table-responsive'>
+						<table  class='table table-dark table-hover'>
+							<tr>
+								<th>Nombre</th>
+								<th>Email</th>
+								<th>Problema del móvil</th>
+								<th>Fecha</th>
+								<th>Técnico</th>
+								<th>Precio</th>
+								<th>Resumen Precio</th>
+								<th>Resuelto</th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>";
+				foreach($incidencias as $incidencia) {
+					if($incidencia['tecnico'] == $_SESSION['usuario']) {
+						$tabla.="
+							<tr>
+								<td>".$incidencia['nombre']."</td>
+								<td>".$incidencia['email']."</td>
+								<td>".$incidencia['problema']."</td>
+								<td>".$incidencia['fecha']."</td>
+								<td>".$incidencia['tecnico']."</td>
+								<td>".$incidencia['precio']."</td>
+								<td>".$incidencia['resumen_precio']."</td>
+								<td>".$incidencia['resuelto']."</td>
+								<td>
+									<a href='gestion.php?fin=$incidencia[id]'>
+										<input type='image' src='../img/finalizar.png' id='aceptar' name='aceptar' value=''/>
 									</a>
-							</td>
-                    		<td>
-								<a href='borrarIncidencia.php?id=$incidencia[id]'>
-									<img src='../img/borrar.png' alt=''>
-								</a>
-							</td>
-                    	</tr>";
-                }
-            }
-                $tabla.="</table></div>";
-                return $tabla;
-        } else {
-            $tabla = "
-				<div class='table-responsive'>
-					<table  class='table table-dark table-hover'>
-						<tr>
-							<th>Nombre</th>
-							<th>Email</th>
-							<th>Problema del móvil</th>
-							<th>Fecha</th>
-							<th>Técnico</th>
-							<th>Resuelto</th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>";
-            foreach($incidencias as $incidencia) {
-                $tabla.="
-						<tr>
-							<td>".$incidencia['nombre']."</td>
-							<td>".$incidencia['email']."</td>
-							<td>".$incidencia['problema']."</td>
-							<td>".$incidencia['fecha']."</td>
-							<td>".$incidencia['tecnico']."</td>
-							<td>".$incidencia['resuelto']."</td>
-                			<td>";
-
-				if ( $incidencia['tecnico'] == "")
-				{
-					$tabla .= "
-							<td>
-								<a href='gestion.php?id=$incidencia[id]'>
-								<input type='image' src='../img/aceptar.png' id='aceptar' name='aceptar'/>
-								</a>
-							</td>
-					";
+								</td>
+								<td>
+									<a href='editarIncidencia.php?id=$incidencia[id]'>
+										<img src='../img/lapiz.png' alt=''>
+									</a>
+								</td>
+								<td>
+									<a href='borrarIncidencia.php?id=$incidencia[id]'>
+										<img src='../img/borrar.png' alt=''>
+									</a>
+								</td>
+							</tr>";
+					}
 				}
-            }
-            $tabla.="	</tr>
-					</table>
-				</div>";
-            return $tabla;
-        }
+					$tabla.="</table></div>";
+					return $tabla;
+			} else {
+				$tabla = "
+					<div class='table-responsive'>
+						<table  class='table table-dark table-hover'>
+							<tr>
+								<th>Nombre</th>
+								<th>Email</th>
+								<th>Problema del móvil</th>
+								<th>Fecha</th>
+								<th>Técnico</th>
+								<th>Resuelto</th>
+							</tr>";
+				foreach($incidencias as $incidencia) {
+					$tabla.="
+							<tr>
+								<td>".$incidencia['nombre']."</td>
+								<td>".$incidencia['email']."</td>
+								<td>".$incidencia['problema']."</td>
+								<td>".$incidencia['fecha']."</td>
+								<td>".$incidencia['tecnico']."</td>
+								<td>".$incidencia['resuelto']."</td>";
+
+					if ( $incidencia['tecnico'] == "")
+					{
+						$tabla .= "
+								<td>
+									<a href='gestion.php?id=$incidencia[id]'>
+									<input type='image' src='../img/aceptar.png' id='aceptar' name='aceptar'/>
+									</a>
+								</td>
+						";
+					}
+				}
+				$tabla.="	</tr>
+						</table>
+					</div>";
+				return $tabla;
+			}
+		} else {
+			return "<p>No hay incidencias para mostrar</p>";
+		}
     }
 
     function comprobarSiEstaLogeado() {
@@ -372,6 +372,7 @@
 
 	function mostrarIncidenciasResueltas() {
         $incidencias = obtenerIncidenciasResueltasJson();
+		if(count($incidencias) > 0) {
             $tabla = "
 				<div class='table-responsive'>
 					<table  class='table table-dark table-hover'>
@@ -400,6 +401,9 @@
                 }
                 $tabla.="</table></div>";
                 return $tabla;
+		} else {
+			return "<p>No hay incidencias resueltas</p>";
+		}
     }
 
 	function comprobarUsuarioTieneIncidenciaResuelta() {
