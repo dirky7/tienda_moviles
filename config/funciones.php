@@ -461,8 +461,15 @@
         //Decodifico el json
         $arrayexistente = json_decode($data, true);
         //Creo un contador para el id segun los archivos del json para asignar una id
-       $cont=count($arrayexistente);
-       $id=$cont+1;
+      
+		$id=0;
+		foreach ($arrayexistente as &$registro) {
+			if ($registro['id'] > $id) {
+				$id=$registro['id'];
+			}	
+				
+		}
+	   $id +=1;
         //Creo el array con los datos
         $datos = array(
         'id' =>$id,
@@ -471,8 +478,8 @@
         'tecnico' => $tecnico,
         'problema' => $problema,
         'fecha' => $fecha,
-        'resuelto' => "",
-        'precio' =>"",
+        'resuelto' => "no",
+        'precio' =>0,
         'observaciones' =>"",
         'fechaActu'=>"",
 
@@ -488,6 +495,24 @@
 		file_put_contents('incidencias.json', $nuevosdatos);
     }
 
-    function actualizarIncidencia(){
+    function actualizarIncidencia($id,$precio,$observaciones,$fechaActu){
+		 //Obtengo el contenido del json
+		 $json = file_get_contents('incidencias.json');
+		 //Decodifico el json
+		 $data = json_decode($json, true);
+		 //Creo un contador para el id segun los archivos del json para asignar una id
+		 foreach ($data as &$registro) {
+			if ($registro['id'] == $id) {
+				// Actualizar la ciudad del registro
+				$registro['precio'] = $precio;
+				$registro['observaciones'] = $observaciones;
+				$registro['fechaActu'] = $fechaActu;
+			}	
+				
+		}
+		
+		
+		$nuevosdatos=json_encode($data, JSON_PRETTY_PRINT);
+		file_put_contents('incidencias.json', $nuevosdatos);
 
     }
