@@ -477,7 +477,7 @@
         //Agrego los datos al array
         array_push($arrayexistente, $datos);
         //Codifico el json
-	    $nuevosdatos=json_encode($arrayexistente);
+	    $nuevosdatos=json_encode($arrayexistente, JSON_PRETTY_PRINT);
 		
 
 		// Guardar el array actualizado en el archivo JSON
