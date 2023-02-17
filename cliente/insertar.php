@@ -24,9 +24,15 @@
 		header('Location:index.php');
 
 
-
-
 	}
+
+
+
+
+
+
+
+
 	if (isset($_POST['volver'])) {
 		header('Location:../index.php');
 

@@ -505,7 +505,7 @@
 			if ($registro['id'] == $id) {
 				// Actualizar la ciudad del registro
 				$registro['precio'] = $precio;
-				$registro['observaciones'] = $observaciones;
+				$registro['resumenprecio'] = $observaciones;
 				$registro['fechaActu'] = $fechaActu;
 			}
 
