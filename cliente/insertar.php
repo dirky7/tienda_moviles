@@ -4,28 +4,25 @@
 	session_start();
 	$mensaje="";
 	if (isset($_POST['submit'])) {
-
 		$name=$_POST['nombre'];
 		$mail=$_POST['mail'];
 		$problema=$_POST['problema'];
 		$tecnico=$_POST['tecnico'];
 		$fecha = date("d-m-Y h:i");
-		insertarIncidencia($name, $mail,$tecnico, $problema, $fecha);
-
-
-	}
-	if (isset($_POST['volver'])) {
-		header('Location:index.php');
-
 
 		$tecnico=$_POST['tecnico'];
 		if (empty($name) || empty($mail) || empty($problema)) {
 			$mensaje= '<div style="background-color:#ffb3b3;padding:10px;border-radius:3px; ">Por favor completa los campos</div>';
-		  } else {
+		} else {
 			$fecha = date('d/m/Y');
 			insertarIncidencia($name, $mail, $tecnico, $problema, $fecha);
 			$mensaje = '<div style="text-align:center;padding:10px;border-radius:3px;margin-top:15px; ">La incidencia se ha guardado exitosamente</div>';
-		  }
+		}
+	}
+
+	if (isset($_POST['volver'])) {
+		header('Location:index.php');
+
 
 
 
@@ -122,7 +119,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-<<<<<<< HEAD
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="../inicio.php">Inicio</a>
                     </li>
@@ -149,7 +145,6 @@
             </div>
         </div>
     </nav>
-=======
 
                 </ul>
 
@@ -161,7 +156,6 @@
 
             </ul>
         </nav>
->>>>>>> 42619b017c4699db875e7d0db7af55ef53f816a2
 <form method="post">
 		<label for="nombre">Nombre:</label>
 		<input type="text" name="nombre" id="nombre" ><br>

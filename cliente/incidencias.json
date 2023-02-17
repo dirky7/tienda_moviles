@@ -1,15 +1,41 @@
 [
     {
         "id": 1,
-        "nombre": "Mario",
-        "email": "mario123@gmail.com",
-        "tecnico": "jesus29",
-        "problema": "movil roto",
-        "fecha": "17-02-2023 12:31",
+        "nombre": "Jesus",
+        "email": "jesus123@gmail.com",
+        "tecnico": "",
+        "problema": "Movil roto",
+        "fecha": "17\/02\/2023",
         "resuelto": "No",
-        "precio": 20,
+        "precio": 0,
         "resumenPrecio": "",
         "fechaActu": "",
-        "horasTraba": 0.5
+        "observaciones": ""
+    },
+    {
+        "id": 2,
+        "nombre": "Pepe",
+        "email": "pepe@gmail.com",
+        "tecnico": "",
+        "problema": "Pantlalla rota",
+        "fecha": "17\/02\/2023",
+        "resuelto": "No",
+        "precio": 0,
+        "resumenPrecio": "",
+        "fechaActu": "",
+        "observaciones": ""
+    },
+    {
+        "id": 3,
+        "nombre": "Lucas",
+        "email": "lucas12@gmail.com",
+        "tecnico": "",
+        "problema": "No carga",
+        "fecha": "17\/02\/2023",
+        "resuelto": "No",
+        "precio": 0,
+        "resumenPrecio": "",
+        "fechaActu": "",
+        "observaciones": ""
     }
 ]

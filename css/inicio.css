@@ -3,11 +3,6 @@ body {
 	color: #6a6f8c;
 	background: #c8c8c8;
 	font: 600 16px/18px 'Open Sans', sans-serif;
-	/*background-image: url('../movil.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-		box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);*/
-
 }
 
 
@@ -43,6 +38,9 @@ a {
 	position: relative;
 	background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center/54% fixed;
 	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+	margin-top: 5px;
+	border-radius: 10px;
+
 }
 
 .login-html {
@@ -51,6 +49,7 @@ a {
 	position: absolute;
 	padding: 90px 70px 50px 70px;
 	background: rgba(40, 57, 101, .9);
+	border-radius: 10px;
 }
 
 .login-html .sign-in-htm,

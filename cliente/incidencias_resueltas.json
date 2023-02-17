@@ -1,3 +1,15 @@
 [
- 
+    {
+        "id": 4,
+        "nombre": "Jose",
+        "email": "jose922@gmail.com",
+        "tecnico": "jesus29",
+        "problema": "No funciona tactil",
+        "fecha": "17\/02\/2023",
+        "resuelto": "Si",
+        "precio": 10,
+        "resumenPrecio": "",
+        "fechaActu": "17-02-2023 08:30",
+        "observaciones": "sa"
+    }
 ]

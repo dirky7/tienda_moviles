@@ -84,7 +84,7 @@ if(isset($_GET['id'])) {
                     actualizarIncidenciaResuelta($_GET['fin']);
                     moverIncidenciasResueltas($_GET['fin']);
                 } else {
-                    echo "<p>Debes actualizar el precio y las horas trabajadas</p>";
+                    echo "<p class='error'>Debes actualizar el precio y las observaciones</p>";
                 }
             }
 

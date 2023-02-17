@@ -1,6 +1,4 @@
 <?php
-	const PRECIO_POR_HORA =	7;
-
     //Metodo para crear archivo json
     function anyadirTecnicoJson($nombre, $apellidos, $login, $password, $email){
         $data = file_get_contents('datos_tecnicos.json');
@@ -169,10 +167,10 @@
 								<th>Nombre</th>
 								<th>Email</th>
 								<th>Problema del móvil</th>
-								<th>Fecha</th>
 								<th>Técnico</th>
+								<th>Fecha Ingreso</th>
 								<th>Precio</th>
-								<th>Horas trabajadas</th>
+								<th>Observaciones</th>
 								<th>Resuelto</th>
 								<th></th>
 								<th></th>
@@ -185,10 +183,10 @@
 								<td>".$incidencia['nombre']."</td>
 								<td>".$incidencia['email']."</td>
 								<td>".$incidencia['problema']."</td>
-								<td>".$incidencia['fecha']."</td>
 								<td>".$incidencia['tecnico']."</td>
+								<td>".$incidencia['fecha']."</td>
 								<td>".$incidencia['precio']."</td>
-								<td>".$incidencia['horasTraba']."</td>
+								<td>".$incidencia['observaciones']."</td>
 								<td>".$incidencia['resuelto']."</td>
 								<td class='FinEdiBorr'>
 									<a href='gestion.php?fin=$incidencia[id]'>
@@ -218,8 +216,8 @@
 								<th>Nombre</th>
 								<th>Email</th>
 								<th>Problema del móvil</th>
-								<th>Fecha</th>
 								<th>Técnico</th>
+								<th>Fecha</th>
 								<th>Resuelto</th>
 							</tr>";
 				foreach($incidencias as $incidencia) {
@@ -228,8 +226,8 @@
 								<td>".$incidencia['nombre']."</td>
 								<td>".$incidencia['email']."</td>
 								<td>".$incidencia['problema']."</td>
-								<td>".$incidencia['fecha']."</td>
 								<td>".$incidencia['tecnico']."</td>
+								<td>".$incidencia['fecha']."</td>
 								<td>".$incidencia['resuelto']."</td>";
 
 					if ( $incidencia['tecnico'] == "")
@@ -280,7 +278,7 @@
 		{
 			if ($valor['id'] == $id )
 			{
-                if($valor['precio'] > 0 && $valor['horasTraba'] > 0) {
+                if($valor['precio'] > 0 && $valor['observaciones'] != "") {
                     return true;
                 }
 			}
@@ -294,7 +292,6 @@
 		{
 			if ($valor['id'] == $id)
 			{
-				$datos_tecnicos[$clave]['resumenPrecio'];
 				$datos_tecnicos[$clave]['fechaActu'] = date("d-m-Y h:i");
 				$datos_tecnicos[$clave]['resuelto'] = "Si";
 			}
@@ -337,11 +334,25 @@
 		}
         $data = json_encode($incidencia_resueltas, JSON_PRETTY_PRINT);
         file_put_contents('incidencias_resueltas.json', $data);
-		borrarIncidencia($id);
+		borrarIncidenciaResuelta($id);
     }
 
-
 	function borrarIncidencia($id) {
+		$datos_tecnicos = obtenerIncidenciasJson();
+		foreach ($datos_tecnicos as $clave => $valor)
+		{
+			if ($valor['id'] == $id )
+			{
+				unset($datos_tecnicos[$clave]);
+			}
+		}
+		$datos_tecnicos = array_values($datos_tecnicos);
+		$data = json_encode($datos_tecnicos, JSON_PRETTY_PRINT);
+        file_put_contents('incidencias.json', $data);
+	}
+
+
+	function borrarIncidenciaResuelta($id) {
 		$datos_tecnicos = obtenerIncidenciasJson();
 		foreach ($datos_tecnicos as $clave => $valor)
 		{
@@ -365,11 +376,11 @@
 							<th>Nombre</th>
 							<th>Email</th>
 							<th>Problema del móvil</th>
-							<th>Fecha Incidencia</th>
 							<th>Técnico</th>
-                            <th>Precio</th>
-							<th>Resumen Precio</th>
+							<th>Fecha Registro</th>
 							<th>Fecha Arreglo</th>
+                            <th>Precio</th>
+							<th>Observaciones</th>
 							<th>Resuelto</th>
 						</tr>";
             foreach($incidencias as $incidencia) {
@@ -378,11 +389,11 @@
 							<td>".$incidencia['nombre']."</td>
                     		<td>".$incidencia['email']."</td>
                     		<td>".$incidencia['problema']."</td>
-		                    <td>".$incidencia['fecha']."</td>
                     		<td>".$incidencia['tecnico']."</td>
-                    		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumenPrecio']."</td>
+		                    <td>".$incidencia['fecha']."</td>
 							<td>".$incidencia['fechaActu']."</td>
+                    		<td>".$incidencia['precio']."</td>
+                            <td>".$incidencia['observaciones']."</td>
                     		<td>".$incidencia['resuelto']."</td>
                     	</tr>";
                 }
@@ -414,24 +425,26 @@
 							<th>Nombre</th>
 							<th>Email</th>
 							<th>Problema del móvil</th>
-							<th>Fecha</th>
 							<th>Técnico</th>
-                            <th>Precio</th>
-							<th>Resumen Precio</th>
+							<th>Fecha Registro</th>
+							<th>Fecha Arreglo</th>
+							<th>Precio</th>
+							<th>Observaciones</th>
 							<th>Resuelto</th>
 						</tr>";
             foreach($incidencias as $incidencia) {
 				if($incidencia['tecnico'] == $_SESSION['usuario']) {
                     $tabla.="
 						<tr>
-							<td>".$incidencia['nombre']."</td>
-                    		<td>".$incidencia['email']."</td>
-                    		<td>".$incidencia['problema']."</td>
-		                    <td>".$incidencia['fecha']."</td>
-                    		<td>".$incidencia['tecnico']."</td>
-                    		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumenPrecio']."</td>
-                    		<td>".$incidencia['resuelto']."</td>
+						<td>".$incidencia['nombre']."</td>
+						<td>".$incidencia['email']."</td>
+						<td>".$incidencia['problema']."</td>
+						<td>".$incidencia['tecnico']."</td>
+						<td>".$incidencia['fecha']."</td>
+						<td>".$incidencia['fechaActu']."</td>
+						<td>".$incidencia['precio']."</td>
+						<td>".$incidencia['observaciones']."</td>
+						<td>".$incidencia['resuelto']."</td>
                     	</tr>";
 				}
             }
@@ -469,7 +482,7 @@
         'precio' => 0,
         'resumenPrecio' => "",
         'fechaActu' => "",
-		'horasTraba' => 0,
+		'observaciones' => "",
         );
 
         //Agrego los datos al array
@@ -503,3 +516,16 @@
 		file_put_contents('incidencias.json', $nuevosdatos);
 
     }
+
+
+	function comprbarSiExisteUsuario($login) {
+		$datos_tecnicos = obtenerTecnicosJson();
+		if (count($datos_tecnicos) > 0) {
+			foreach ($datos_tecnicos as $clave => $valor) {
+				if ($valor['login'] == $login) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
