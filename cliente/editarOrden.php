@@ -8,10 +8,11 @@
     if (isset($_POST['submit'])) {
         $precio=$_POST['precio'];	
         $observaciones=$_POST['observaciones'];	
+		
        	
-        $fecha2 = date('d-m-Y');
+        $fecha2 = date('d/m/Y');
         
-        actualizarIncidencia();
+        actualizarIncidencia($id,$precio,$observaciones,$fecha2);
         
         header('Location:gestion.php');
     }
