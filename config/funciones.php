@@ -145,31 +145,10 @@
 							<td>".$tecnico['nombre']."</td>
                     		<td>".$tecnico['apellidos']."</td>
 		                    <td>".$tecnico['login']."</td>
-                    		<td>".$tecnico['email']."</td>";
-				if ($tecnico['autorizado'] == "si")
-				{
-						$tabla.= "
-							<td>
-								<select name='' id=''>
-									<option value='si' selected>Si</option>
-									<option value='no'>No</option>
-								</select>
-							</td>
-						";
-				}
-				else
-				{
-					$tabla.= "
-							<td>
-								<select name='' id=''>
-									<option value='si'>Si</option>
-									<option value='no' selected>No</option>
-								</select>
-							</td>
-						";
-				}
-
-                $tabla .= "</tr>";
+                    		<td>".$tecnico['email']."</td>
+							<td>".$tecnico['autorizado']."</td>
+							<td><
+						</tr>";
             }
 			$tabla.="
 					</table>
