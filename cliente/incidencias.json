@@ -1,15 +1,58 @@
 [
     {
         "id": 1,
-        "nombre": "Mario",
-        "email": "mario123@gmail.com",
+        "nombre": "Juan Ramirez Gonzalez",
+        "email": "juan281@gmail.com",
+        "problema": "Panntalla rota",
+        "fecha": "15\/10\/2020",
         "tecnico": "jesus29",
-        "problema": "movil roto",
-        "fecha": "17-02-2023 12:31",
-        "resuelto": "No",
         "precio": 20,
-        "resumenPrecio": "",
-        "fechaActu": "",
-        "horasTraba": 0.5
+        "resumen_precio": "as",
+        "resuelto": "Si"
+    },
+    {
+        "id": 2,
+        "nombre": "Pepe Dominguez Casta\u00f1o",
+        "email": "pepe120@gmail.com",
+        "problema": "No carga",
+        "fecha": "5\/08\/2022",
+        "tecnico": "dani",
+        "precio": 0,
+        "resumen_precio": "ff",
+        "resuelto": "No"
+    },
+    {
+        "id": 4,
+        "nombre": "Juan Castro",
+        "email": "jaun123@gmail.com",
+        "problema": "Cambiar bateria",
+        "fecha": "5\/05\/2022",
+        "tecnico": "jesus29",
+        "precio": 10,
+        "resumen_precio": "dd",
+        "resuelto": "Si"
+    },
+    {
+        "id": 5,
+        "nombre": "Juan Castro",
+        "email": "jaun123@gmail.com",
+        "problema": "Cambiar bateria",
+        "fecha": "5\/05\/2022",
+        "tecnico": "migue",
+        "precio": 10,
+        "resumen_precio": "dd",
+        "resuelto": "no"
+    },
+    {
+        "id": 5,
+        "nombre": "werywet",
+        "email": "ertyietydrt",
+        "tecnico": "",
+        "problema": "drtjdcrtjdct",
+        "fecha": "16-02-2023",
+        "resuelto": "",
+        "precio": "",
+        "observaciones": "",
+        "fechaActu": ""
     }
 ]
