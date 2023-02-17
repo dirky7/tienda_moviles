@@ -323,23 +323,12 @@ main {
 	color: red;
 }
 
-img {
-	width: 30%;
-}
-
 aside {
 	width: 70%;
 	margin: auto;
 	margin-top: 20px ;
 }
 
-table td {
-	width: 10%;
-}
-
-input[type='image'] {
-	width: 30%;
-}
 /* Nav menu*/
 nav {
 	background: #000;
@@ -392,3 +381,26 @@ nav {
     background-position-x: 390px;
   }
 }
+
+table td {
+	padding:8px;
+}
+
+@media only screen and (max-width : 480px) {
+
+}
+
+
+
+
+
+
+
+table {
+	text-align: center;
+}
+
+/*
+tr td:nth-child(1) {
+	width: 20%;
+}*/

@@ -16,7 +16,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/inicio.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <title>Inicio</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-red navbar-dark">
@@ -58,7 +59,7 @@ session_start();
     <main>
         <ul class="card-wrapper">
             <?php
-			
+
 				if ($_SESSION['usuario'] == "")
 				{
 					echo "
@@ -102,7 +103,7 @@ session_start();
 						";
 					}
 				}
-			
+
 			?>
         </ul>
     </main>

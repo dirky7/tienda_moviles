@@ -1,4 +1,6 @@
 <?php
+	const PRECIO_POR_HORA =	7;
+
     //Metodo para crear archivo json
     function anyadirTecnicoJson($nombre, $apellidos, $login, $password, $email){
         $data = file_get_contents('datos_tecnicos.json');
@@ -183,7 +185,7 @@
 			if(comprobarUsuarioTieneIncidencia()) {
 				$tabla = "
 					<div class='table-responsive'>
-						<table  class='table table-dark table-hover'>
+						<table class='table table-dark table-hover'>
 							<tr>
 								<th>Nombre</th>
 								<th>Email</th>
@@ -191,7 +193,7 @@
 								<th>Fecha</th>
 								<th>Técnico</th>
 								<th>Precio</th>
-								<th>Resumen Precio</th>
+								<th>Horas trabajadas</th>
 								<th>Resuelto</th>
 								<th></th>
 								<th></th>
@@ -207,21 +209,21 @@
 								<td>".$incidencia['fecha']."</td>
 								<td>".$incidencia['tecnico']."</td>
 								<td>".$incidencia['precio']."</td>
-								<td>".$incidencia['resumen_precio']."</td>
+								<td>".$incidencia['horasTraba']."</td>
 								<td>".$incidencia['resuelto']."</td>
-								<td>
+								<td class='FinEdiBorr'>
 									<a href='gestion.php?fin=$incidencia[id]'>
-										<input type='image' src='../img/finalizar.png' id='aceptar' name='aceptar' value=''/>
+									<input type='image' src='../img/tarea-completada.png' name='finalizar'/>
 									</a>
 								</td>
-								<td>
-									<a href='editarIncidencia.php?id=$incidencia[id]'>
-										<img src='../img/lapiz.png' alt=''>
+								<td class='FinEdiBorr'>
+									<a href='editarOrden.php?id=$incidencia[id]'>
+										<input type='image' src='../img/lapiz.png' name='editar'/>
 									</a>
 								</td>
-								<td>
-									<a href='borrarIncidencia.php?id=$incidencia[id]'>
-										<img src='../img/borrar.png' alt=''>
+								<td class='FinEdiBorr'>
+									<a href='eliminarOrden.php?id=$incidencia[id]'>
+										<input type='image' src='../img/borrar.png' name='borrar'/>
 									</a>
 								</td>
 							</tr>";
@@ -232,7 +234,7 @@
 			} else {
 				$tabla = "
 					<div class='table-responsive'>
-						<table  class='table table-dark table-hover'>
+						<table class='table table-dark table-hover '>
 							<tr>
 								<th>Nombre</th>
 								<th>Email</th>
@@ -254,12 +256,14 @@
 					if ( $incidencia['tecnico'] == "")
 					{
 						$tabla .= "
-								<td>
+								<td class='columAceptar'>
 									<a href='gestion.php?id=$incidencia[id]'>
-									<input type='image' src='../img/aceptar.png' id='aceptar' name='aceptar'/>
+									<input class='aceptar' type='image' src='../img/aceptar.png' name='aceptar'/>
 									</a>
 								</td>
 						";
+					} else {
+						$tabla .= "<td></td>";
 					}
 				}
 				$tabla.="	</tr>
@@ -297,7 +301,7 @@
 		{
 			if ($valor['id'] == $id )
 			{
-                if($valor['precio'] > 0  && $valor['resumen_precio'] != "") {
+                if($valor['precio'] > 0 && $valor['horasTraba'] > 0) {
                     return true;
                 }
 			}
@@ -311,6 +315,8 @@
 		{
 			if ($valor['id'] == $id)
 			{
+				$datos_tecnicos[$clave]['resumenPrecio'];
+				$datos_tecnicos[$clave]['fechaActu'] = date("d-m-Y h:i");
 				$datos_tecnicos[$clave]['resuelto'] = "Si";
 			}
 		}
@@ -380,10 +386,11 @@
 							<th>Nombre</th>
 							<th>Email</th>
 							<th>Problema del móvil</th>
-							<th>Fecha</th>
+							<th>Fecha Incidencia</th>
 							<th>Técnico</th>
                             <th>Precio</th>
 							<th>Resumen Precio</th>
+							<th>Fecha Arreglo</th>
 							<th>Resuelto</th>
 						</tr>";
             foreach($incidencias as $incidencia) {
@@ -395,7 +402,8 @@
 		                    <td>".$incidencia['fecha']."</td>
                     		<td>".$incidencia['tecnico']."</td>
                     		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumen_precio']."</td>
+                            <td>".$incidencia['resumenPrecio']."</td>
+							<td>".$incidencia['fechaActu']."</td>
                     		<td>".$incidencia['resuelto']."</td>
                     	</tr>";
                 }
@@ -443,7 +451,7 @@
 		                    <td>".$incidencia['fecha']."</td>
                     		<td>".$incidencia['tecnico']."</td>
                     		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumen_precio']."</td>
+                            <td>".$incidencia['resumenPrecio']."</td>
                     		<td>".$incidencia['resuelto']."</td>
                     	</tr>";
 				}
@@ -471,18 +479,18 @@
         'tecnico' => $tecnico,
         'problema' => $problema,
         'fecha' => $fecha,
-        'resuelto' => "",
-        'precio' =>"",
-        'observaciones' =>"",
-        'fechaActu'=>"",
-
+        'resuelto' => "No",
+        'precio' => 0,
+        'resumenPrecio' => "",
+        'fechaActu' => "",
+		'horasTraba' => 0,
         );
-       
+
         //Agrego los datos al array
         array_push($arrayexistente, $datos);
         //Codifico el json
 	    $nuevosdatos=json_encode($arrayexistente, JSON_PRETTY_PRINT);
-		
+
 
 		// Guardar el array actualizado en el archivo JSON
 		file_put_contents('incidencias.json', $nuevosdatos);
