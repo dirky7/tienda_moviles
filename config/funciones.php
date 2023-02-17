@@ -1,4 +1,6 @@
 <?php
+	const PRECIO_POR_HORA =	7;
+
     //Metodo para crear archivo json
     function anyadirTecnicoJson($nombre, $apellidos, $login, $password, $email){
         $data = file_get_contents('datos_tecnicos.json');
@@ -145,31 +147,10 @@
 							<td>".$tecnico['nombre']."</td>
                     		<td>".$tecnico['apellidos']."</td>
 		                    <td>".$tecnico['login']."</td>
-                    		<td>".$tecnico['email']."</td>";
-				if ($tecnico['autorizado'] == "si")
-				{
-						$tabla.= "
-							<td>
-								<select name='' id=''>
-									<option value='si' selected>Si</option>
-									<option value='no'>No</option>
-								</select>
-							</td>
-						";
-				}
-				else
-				{
-					$tabla.= "
-							<td>
-								<select name='' id=''>
-									<option value='si'>Si</option>
-									<option value='no' selected>No</option>
-								</select>
-							</td>
-						";
-				}
-
-                $tabla .= "</tr>";
+                    		<td>".$tecnico['email']."</td>
+							<td>".$tecnico['autorizado']."</td>
+							<td><
+						</tr>";
             }
 			$tabla.="
 					</table>
@@ -179,97 +160,99 @@
 
     function mostrarIncidencias() {
         $incidencias = obtenerIncidenciasJson();
-        if(comprobarUsuarioTieneIncidencia()) {
-            $tabla = "
-				<div class='table-responsive'>
-					<table  class='table table-dark table-hover'>
-						<tr>
-							<th>Nombre</th>
-							<th>Email</th>
-							<th>Problema del móvil</th>
-							<th>Fecha</th>
-							<th>Técnico</th>
-                            <th>Precio</th>
-							<th>Resumen Precio</th>
-							<th>Resuelto</th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>";
-            foreach($incidencias as $incidencia) {
-                if($incidencia['tecnico'] == $_SESSION['usuario']) {
-                    $tabla.="
-						<tr>
-							<td>".$incidencia['nombre']."</td>
-                    		<td>".$incidencia['email']."</td>
-                    		<td>".$incidencia['problema']."</td>
-		                    <td>".$incidencia['fecha']."</td>
-                    		<td>".$incidencia['tecnico']."</td>
-                    		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumen_precio']."</td>
-                    		<td>".$incidencia['resuelto']."</td>
-		                    <td>
-								<a href='gestion.php?fin=$incidencia[id]'>
-                                    <input type='image' src='../img/finalizar.png' id='aceptar' name='aceptar' value=''/>
-								</a>
-							</td>
-		                    <td>
-								<a href='editarIncidencia.php?id=$incidencia[id]'>
-									<img src='../img/lapiz.png' alt=''>
+		if(count($incidencias) > 0) {
+			if(comprobarUsuarioTieneIncidencia()) {
+				$tabla = "
+					<div class='table-responsive'>
+						<table class='table table-dark table-hover'>
+							<tr>
+								<th>Nombre</th>
+								<th>Email</th>
+								<th>Problema del móvil</th>
+								<th>Fecha</th>
+								<th>Técnico</th>
+								<th>Precio</th>
+								<th>Horas trabajadas</th>
+								<th>Resuelto</th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>";
+				foreach($incidencias as $incidencia) {
+					if($incidencia['tecnico'] == $_SESSION['usuario']) {
+						$tabla.="
+							<tr>
+								<td>".$incidencia['nombre']."</td>
+								<td>".$incidencia['email']."</td>
+								<td>".$incidencia['problema']."</td>
+								<td>".$incidencia['fecha']."</td>
+								<td>".$incidencia['tecnico']."</td>
+								<td>".$incidencia['precio']."</td>
+								<td>".$incidencia['horasTraba']."</td>
+								<td>".$incidencia['resuelto']."</td>
+								<td class='FinEdiBorr'>
+									<a href='gestion.php?fin=$incidencia[id]'>
+									<input type='image' src='../img/tarea-completada.png' name='finalizar'/>
 									</a>
-							</td>
-                    		<td>
-								<a href='borrarIncidencia.php?id=$incidencia[id]'>
-									<img src='../img/borrar.png' alt=''>
-								</a>
-							</td>
-                    	</tr>";
-                }
-            }
-                $tabla.="</table></div>";
-                return $tabla;
-        } else {
-            $tabla = "
-				<div class='table-responsive'>
-					<table  class='table table-dark table-hover'>
-						<tr>
-							<th>Nombre</th>
-							<th>Email</th>
-							<th>Problema del móvil</th>
-							<th>Fecha</th>
-							<th>Técnico</th>
-							<th>Resuelto</th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>";
-            foreach($incidencias as $incidencia) {
-                $tabla.="
-						<tr>
-							<td>".$incidencia['nombre']."</td>
-							<td>".$incidencia['email']."</td>
-							<td>".$incidencia['problema']."</td>
-							<td>".$incidencia['fecha']."</td>
-							<td>".$incidencia['tecnico']."</td>
-							<td>".$incidencia['resuelto']."</td>
-                			<td>";
-
-				if ( $incidencia['tecnico'] == "")
-				{
-					$tabla .= "
-							<td>
-								<a href='gestion.php?id=$incidencia[id]'>
-								<input type='image' src='../img/aceptar.png' id='aceptar' name='aceptar'/>
-								</a>
-							</td>
-					";
+								</td>
+								<td class='FinEdiBorr'>
+									<a href='editarOrden.php?id=$incidencia[id]'>
+										<input type='image' src='../img/lapiz.png' name='editar'/>
+									</a>
+								</td>
+								<td class='FinEdiBorr'>
+									<a href='eliminarOrden.php?id=$incidencia[id]'>
+										<input type='image' src='../img/borrar.png' name='borrar'/>
+									</a>
+								</td>
+							</tr>";
+					}
 				}
-            }
-            $tabla.="	</tr>
-					</table>
-				</div>";
-            return $tabla;
-        }
+					$tabla.="</table></div>";
+					return $tabla;
+			} else {
+				$tabla = "
+					<div class='table-responsive'>
+						<table class='table table-dark table-hover '>
+							<tr>
+								<th>Nombre</th>
+								<th>Email</th>
+								<th>Problema del móvil</th>
+								<th>Fecha</th>
+								<th>Técnico</th>
+								<th>Resuelto</th>
+							</tr>";
+				foreach($incidencias as $incidencia) {
+					$tabla.="
+							<tr>
+								<td>".$incidencia['nombre']."</td>
+								<td>".$incidencia['email']."</td>
+								<td>".$incidencia['problema']."</td>
+								<td>".$incidencia['fecha']."</td>
+								<td>".$incidencia['tecnico']."</td>
+								<td>".$incidencia['resuelto']."</td>";
+
+					if ( $incidencia['tecnico'] == "")
+					{
+						$tabla .= "
+								<td class='columAceptar'>
+									<a href='gestion.php?id=$incidencia[id]'>
+									<input class='aceptar' type='image' src='../img/aceptar.png' name='aceptar'/>
+									</a>
+								</td>
+						";
+					} else {
+						$tabla .= "<td></td>";
+					}
+				}
+				$tabla.="	</tr>
+						</table>
+					</div>";
+				return $tabla;
+			}
+		} else {
+			return "<p>No hay incidencias para mostrar</p>";
+		}
     }
 
     function comprobarSiEstaLogeado() {
@@ -297,7 +280,7 @@
 		{
 			if ($valor['id'] == $id )
 			{
-                if($valor['precio'] > 0  && $valor['resumen_precio'] != "") {
+                if($valor['precio'] > 0 && $valor['horasTraba'] > 0) {
                     return true;
                 }
 			}
@@ -311,6 +294,8 @@
 		{
 			if ($valor['id'] == $id)
 			{
+				$datos_tecnicos[$clave]['resumenPrecio'];
+				$datos_tecnicos[$clave]['fechaActu'] = date("d-m-Y h:i");
 				$datos_tecnicos[$clave]['resuelto'] = "Si";
 			}
 		}
@@ -372,6 +357,7 @@
 
 	function mostrarIncidenciasResueltas() {
         $incidencias = obtenerIncidenciasResueltasJson();
+		if(count($incidencias) > 0) {
             $tabla = "
 				<div class='table-responsive'>
 					<table  class='table table-dark table-hover'>
@@ -379,10 +365,11 @@
 							<th>Nombre</th>
 							<th>Email</th>
 							<th>Problema del móvil</th>
-							<th>Fecha</th>
+							<th>Fecha Incidencia</th>
 							<th>Técnico</th>
                             <th>Precio</th>
 							<th>Resumen Precio</th>
+							<th>Fecha Arreglo</th>
 							<th>Resuelto</th>
 						</tr>";
             foreach($incidencias as $incidencia) {
@@ -394,12 +381,16 @@
 		                    <td>".$incidencia['fecha']."</td>
                     		<td>".$incidencia['tecnico']."</td>
                     		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumen_precio']."</td>
+                            <td>".$incidencia['resumenPrecio']."</td>
+							<td>".$incidencia['fechaActu']."</td>
                     		<td>".$incidencia['resuelto']."</td>
                     	</tr>";
                 }
                 $tabla.="</table></div>";
                 return $tabla;
+		} else {
+			return "<p>No hay incidencias resueltas</p>";
+		}
     }
 
 	function comprobarUsuarioTieneIncidenciaResuelta() {
@@ -439,7 +430,7 @@
 		                    <td>".$incidencia['fecha']."</td>
                     		<td>".$incidencia['tecnico']."</td>
                     		<td>".$incidencia['precio']."</td>
-                            <td>".$incidencia['resumen_precio']."</td>
+                            <td>".$incidencia['resumenPrecio']."</td>
                     		<td>".$incidencia['resuelto']."</td>
                     	</tr>";
 				}
@@ -457,8 +448,15 @@
         //Decodifico el json
         $arrayexistente = json_decode($data, true);
         //Creo un contador para el id segun los archivos del json para asignar una id
-       $cont=count($arrayexistente);
-       $id=$cont+1;
+
+		$id=0;
+		foreach ($arrayexistente as &$registro) {
+			if ($registro['id'] > $id) {
+				$id=$registro['id'];
+			}
+
+		}
+	   $id +=1;
         //Creo el array con los datos
         $datos = array(
         'id' =>$id,
@@ -467,23 +465,41 @@
         'tecnico' => $tecnico,
         'problema' => $problema,
         'fecha' => $fecha,
-        'resuelto' => "",
-        'precio' =>"",
-        'observaciones' =>"",
-        'fechaActu'=>"",
-
+        'resuelto' => "No",
+        'precio' => 0,
+        'resumenPrecio' => "",
+        'fechaActu' => "",
+		'horasTraba' => 0,
         );
-       
+
         //Agrego los datos al array
         array_push($arrayexistente, $datos);
         //Codifico el json
 	    $nuevosdatos=json_encode($arrayexistente, JSON_PRETTY_PRINT);
-		
+
 
 		// Guardar el array actualizado en el archivo JSON
 		file_put_contents('incidencias.json', $nuevosdatos);
     }
 
-    function actualizarIncidencia(){
+    function actualizarIncidencia($id,$precio,$observaciones,$fechaActu){
+		 //Obtengo el contenido del json
+		 $json = file_get_contents('incidencias.json');
+		 //Decodifico el json
+		 $data = json_decode($json, true);
+		 //Creo un contador para el id segun los archivos del json para asignar una id
+		 foreach ($data as &$registro) {
+			if ($registro['id'] == $id) {
+				// Actualizar la ciudad del registro
+				$registro['precio'] = $precio;
+				$registro['observaciones'] = $observaciones;
+				$registro['fechaActu'] = $fechaActu;
+			}
+
+		}
+
+
+		$nuevosdatos=json_encode($data, JSON_PRETTY_PRINT);
+		file_put_contents('incidencias.json', $nuevosdatos);
 
     }
