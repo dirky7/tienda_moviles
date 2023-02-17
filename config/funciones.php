@@ -480,7 +480,6 @@
         'fecha' => $fecha,
         'resuelto' => "No",
         'precio' => 0,
-        'resumenPrecio' => "",
         'fechaActu' => "",
 		'observaciones' => "",
         );
