@@ -1,8 +1,9 @@
 <?php
-    //Metodo para crear archivo json
+    //Funcion para anyadir un tecnico al fichero json datos_tecnicos
     function anyadirTecnicoJson($nombre, $apellidos, $login, $password, $email){
         $data = file_get_contents('datos_tecnicos.json');
         $data = json_decode($data, true);
+		//Array donde asignamos a cada clave un valor
         $add_arr = array(
         'nombre' => $nombre,
         'apellidos' => $apellidos,
@@ -13,14 +14,18 @@
         );
         $data[] = $add_arr;
         $data = json_encode($data, JSON_PRETTY_PRINT);
+		//pasamos los datos del array al archivo
         file_put_contents('datos_tecnicos.json', $data);
     }
 
+	//Funcion para darle permisos de autorizacion a un tecnico
 	function autorizarTecnico($login)
 	{
+		//obtenemos los tecnicos
 		$tecnicos = obtenerUsuarios();
 		foreach ($tecnicos as $tecnico)
 		{
+			//si el login del tecnico es igual al login pasado por parametro y no este autorizado
 			if ($tecnico['login'] == $login && $tecnico['autorizado'] == "no")
 			{
 				return (true);
@@ -29,16 +34,21 @@
 		}
 	}
 
+	//Funcion con la que obtenemos los tecnicos del fichero json
     function obtenerTecnicosJson(){
         $datos_tecnicos = file_get_contents("datos_tecnicos.json");
         $json_tecnicos = json_decode($datos_tecnicos, true);
+		//Devolvemos el contenido del fichero
         return $json_tecnicos;
     }
 
+	//Funcion para comprobar si existe el usuario
     function existeLogin($login) {
+		//oobtenemos los datos de los tecnicos
         $datos_tecnicos = obtenerTecnicosJson();
         if (count($datos_tecnicos) != 0) {
             foreach($datos_tecnicos as $tecnicos) {
+				//si el login es igual login pasado por parametro
                 if($tecnicos['login'] == $login) {
                     return true;
                 }
@@ -51,48 +61,62 @@
     function validacionContraseya($password, $password2)
     {
         $error = "";
+		//si las contraseñas son iguales
         if (strcmp($password, $password2) == 0) {
+			//si la contraseña tiene menos de 6 caracteres
             if (strlen($password) < 6) {
                 $error = "La contraseña debe tener al menos 6 caracteres";
             }
+			//si la contraseña no tiene minuscula
             if (!preg_match('`[a-z]`', $password)) {
                 $error = "La contraseña debe tener al menos 1 minuscula";
             }
+			//si la contraseeña no tiene mayuscula
             if (!preg_match('`[A-Z]`', $password)) {
                 $error = "La contraseña debe tener al menos 1 mayuscula";
             }
+			//si la contraseña no tiene un numero
             if (!preg_match('`[0-9]`', $password)) {
                 $error = "La contraseña debe tener al menos un numero";
             }
+		//si las contraseñas no son iguales
         } else {
             $error = "Las contraseñas deben ser iguales";
         }
         return $error;
     }
 
+	//Funcion para validar el email
     function validar_email($email)
     {
         $error = "";
+		//si el email no cumple esta expresion regular
         if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $email)) {
             $error = "El email no es valido";
         }
         return $error;
     }
 
+	//Funcion para obtener la contraseña del usuario
     function obtenerPassword($login) {
         $datos_tecnicos = obtenerTecnicosJson();
 		foreach ($datos_tecnicos as $clave => $valor)
 		{
+			//si el login es igual login pasado por parametro
 			if ($valor['login'] == $login)
 			{
+				//devolvemos la contraseña
 				return ($valor['password']);
 			}
 		}
     }
 
+	//Funcion para comprobar las credenciales de incio de sesion de un usuario
     function comprobarInicioSesion($login, $password)
     {
+		//obtenemos la contraseña del usuario
 		$password_json = obtenerPassword($login);
+		//si la contraseña obtenida corresponde con la contraseña pasado por parametro
         if (password_verify($password, $password_json)) {
             return true;
         } else {
@@ -100,9 +124,11 @@
         }
     }
 
+	//Funcion para obtener las incidencias del json
     function obtenerIncidenciasJson() {
         $incidencias = file_get_contents("incidencias.json");
         $json_tecnicos = json_decode($incidencias, true);
+		//Devolvemos el contenido del fichero
         return $json_tecnicos;
     }
 
@@ -253,10 +279,16 @@
 		}
     }
 
-    function comprobarSiEstaLogeado() {
-        if (!isset($_SESSION['usuario'])) {
-            die("Error debes <a href='../index.php'>identificarse</a>");
-        }
+    function comprobarSiEstaLogeado($invitado = false) {
+		if($invitado) {
+			if (!isset($_SESSION['usuario']))  {
+				die("Error debes <a href='../index.php'>identificarse</a> o entrar como <a href='../index.php'>Invitado</a>");
+			}
+		} else {
+			if (!isset($_SESSION['usuario']) || $_SESSION['usuario'] == "Invitado")  {
+				die("Error debes <a href='../index.php'>identificarse</a>");
+			}
+		}
     }
 
     function anyadirTecnicoIncidencia($id) {

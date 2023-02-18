@@ -121,24 +121,27 @@
         </nav>ºz
 <?php
 include('../config/funciones.php');
+session_start();
+comprobarSiEstaLogeado();
+
 $id = $_GET['id'];
     if (isset($_POST['submit'])) {
-        $precio=$_POST['precio'];	
-        $observaciones=$_POST['resumenprecio'];	
-       	
+        $precio=$_POST['precio'];
+        $observaciones=$_POST['observaciones'];
+
         $fecha2 = date('d/m/Y');
-        
+
         actualizarIncidencia($id,$precio,$observaciones,$fecha2);
-        
-        
+
+
     }
     if (isset($_POST['volver'])) {
 		header('Location:gestion.php');
-			
-		
+
+
 	}
 ?>
-	
+
 
 	<?php
 	// Obtener el ID del registro a modificar
@@ -161,7 +164,7 @@ $id = $_GET['id'];
 
 
 		<label for="texto">Problema:</label>
-		<textarea name="problema" id="problema" value="<?php echo $saveData['problema']; ?>"readonly></textarea><br><br>		
+		<textarea name="problema" id="problema" value="<?php echo $saveData['problema']; ?>"readonly></textarea><br><br>
 
 		<label for="precio">Precio:</label>
 		<input type="number" name="precio" id="precio"value="<?php echo $saveData['precio']; ?>"requierd><br><br>
@@ -169,7 +172,7 @@ $id = $_GET['id'];
 
 
         <label for="resumenprecio">Observaciones:</label>
-		<textarea name="resumenprecio" id="resumenprecio" value=""></textarea><br><br>	
+		<textarea name="resumenprecio" id="resumenprecio" value=""></textarea><br><br>
 
 		<label for="fecha">Fecha Inicio:</label>
 		<input type="text" name="fecha" id="fecha" value="<?php echo $saveData['fecha']; ?>"><br><br>
@@ -178,8 +181,7 @@ $id = $_GET['id'];
 
 		<input type="submit" name="submit" value="Actualizar">
         <input type="submit" name="volver" value="Volver">
-        
-	</form>
 
+	</form>
 </body>
 </html>

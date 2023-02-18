@@ -1,13 +1,12 @@
 <?php
 include("config/funciones.php");
 
+//Inicamos la sesion
 session_start();
-
-
-
-
-
+//comprobamos si estamos logeado
+comprobarSiEstaLogeado();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,17 +48,15 @@ session_start();
                     </li>
                 </ul>
                 <div class="d-flex flex-column sim">
-                    <span>1 item added to your quote</span>
-                    <small class="text-primary">view your quote</small>
+                    <span>Bienvenido <?php echo $_SESSION['usuario']; ?></span>
+                    <span>Hora de conexión: <?php echo $_SESSION['hora']; ?></span>
                 </div>
             </div>
         </div>
     </nav>
-
     <main>
         <ul class="card-wrapper">
             <?php
-
 				if ($_SESSION['usuario'] == "")
 				{
 					echo "
@@ -103,7 +100,6 @@ session_start();
 						";
 					}
 				}
-
 			?>
         </ul>
     </main>

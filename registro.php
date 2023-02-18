@@ -1,6 +1,7 @@
 <?php
 include("config/funciones.php");
-//Comprobamos si ya se enviado el formulario
+
+//Comprobamos si hemos pulsado el boton registro
 if (isset($_POST['registro'])) {
     //guardamos los datos del formulario
     $nombre = $_POST['nombre'];
@@ -14,7 +15,7 @@ if (isset($_POST['registro'])) {
     //Comprobamos si algun campo vacio
     if (empty($nombre) || empty($apellidos) || empty($login) || empty($password) || empty($password2) || empty($email)) {
         $error = $error . "Debe de completar todos los campos.<br>";
-        //si no hay ningun campo vacio
+     //si no hay ningun campo vacio
     } else {
         //si no existe el login
         if (!existeLogin($login)) {
@@ -22,35 +23,36 @@ if (isset($_POST['registro'])) {
             if (validacionContraseya($password, $password2) == "") {
                 //si la validaicion del email es valido
                 if (validar_email($email) == "") {
+                    //anyadimos al usuario al archivo json
                     anyadirTecnicoJson($nombre, $apellidos, $login, $password, $email);
-                    $anuncio = "Usuario registrado correctamente";
                     header("Location:index.php");
                 //si la validacion del email es incorrecta
                 } else {
                     $error = validar_email($email);
                 }
-                //si la validacion de la contraseña es incorrecta
+            //si la validacion de la contraseña es incorrecta
             } else {
                 $error = validacionContraseya($password, $password2);
             }
-            //si existe el usuario
+        //si existe el usuario
         } else {
             $error = "Ya existe el nombre de usuario";
         }
     }
 }
-
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Foro DWES</title>
+    <title>Tienda Moviles</title>
     <link href="css/inicio.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 <body>
     <form method="post">
+        <!-- Formulario registro -->
         <div class="login-wrap">
             <div class="login-html">
                 <label for="tab-1" class="tab"><a href="index.php">Inicio Sesion</a></label>
@@ -100,14 +102,21 @@ if (isset($_POST['registro'])) {
         </div>
     </form>
 	<script>
+        //evento que hacer click en mostrar contraseña ejecutara la funcion mostrar contraseña
 		document.getElementById("check").addEventListener("click", mostrarContrasena);
 		function mostrarContrasena(){
+            //cojemos el campo de la contraseña
 			var tipo = document.getElementById("pass");
+            //si mostrar contraseña esta activa
 			if(document.getElementById('check').checked) {
+                //cambios el campo de tipo contraseña a tipo text
 				tipo.type = "text";
-			} else{
+            //si no esta activo
+			} else {
+                //cambios el campo de tipo text a tipo contraseña
 				tipo.type = "password";
 			}
+
 			var tipo2 = document.getElementById("pass2");
 			if(document.getElementById('check').checked) {
 				tipo2.type = "text";

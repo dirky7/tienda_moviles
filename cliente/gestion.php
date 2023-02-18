@@ -54,8 +54,8 @@ if(isset($_GET['id'])) {
                     </li>
                 </ul>
                 <div class="d-flex flex-column sim">
-                    <span>1 item added to your quote</span>
-                    <small class="text-primary">view your quote</small>
+                    <span>Bienvenido <?php echo $_SESSION['usuario']; ?></span>
+                    <span>Hora de conexión: <?php echo $_SESSION['hora']; ?></span>
                 </div>
             </div>
         </div>
