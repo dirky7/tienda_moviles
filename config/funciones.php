@@ -526,7 +526,7 @@
 		file_put_contents('incidencias.json', $nuevosdatos);
     }
 
-    function actualizarIncidencia($id,$precio,$observaciones,$fechaActu){
+    function actualizarIncidencia($id,$precio,$observaciones){
 		 //Obtengo el contenido del json
 		 $json = file_get_contents('incidencias.json');
 		 //Decodifico el json
@@ -536,8 +536,8 @@
 			if ($registro['id'] == $id) {
 				// Actualizar la ciudad del registro
 				$registro['precio'] = $precio;
-				$registro['resumenprecio'] = $observaciones;
-				$registro['fechaActu'] = $fechaActu;
+				$registro['observaciones'] = $observaciones;
+				
 			}
 
 		}

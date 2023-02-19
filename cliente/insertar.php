@@ -33,9 +33,9 @@ if (isset($_POST['volver'])) {
 <head>
 	<meta charset="UTF-8">
 	<title>Tienda Moviles</title>
-	<link rel="stylesheet" type="text/css" href="css/inicio.css">
+	
 	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-	<link rel="stylesheet" href="../css/inicio.css">
+	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/inicio.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -43,60 +43,9 @@ if (isset($_POST['volver'])) {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-
-	<style>
-		body {
-			background-color: rgb(240, 240, 240);
-		}
-
-		form {
-			background-color: rgb(220, 220, 220);
-			border-radius: 5px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-			padding: 20px;
-			margin: 50px auto;
-			max-width: 500px;
-
-		}
-
-		label {
-			display: block;
-			font-weight: bold;
-			margin-bottom: 5px;
-		}
-
-		input[type=text],
-		textarea {
-			border: 1px solid #CCC;
-			border-radius: 3px;
-			font-size: 16px;
-			padding: 10px;
-			width: 93%;
-			margin-bottom: 20px;
-		}
-
-		input[type=submit] {
-			background-color: rgb(250, 0, 0);
-			border: none;
-			border-radius: 3px;
-			color: #FFFFFF;
-			font-size: 16px;
-			padding: 10px;
-			width: 100%;
-		}
-
-		input[type=submit]:hover {
-			background-color: #cc0000;
-		}
-
-		input[type=submit]:focus {
-			outline: none;
-		}
-
-		textarea {
-			height: 150px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/inicio.css">
+	
+		
 </head>
 
 <body>
@@ -169,7 +118,8 @@ if (isset($_POST['volver'])) {
 	<?php
 	}
 	?>
-	<form method="post">
+	<div class="formu">
+	<form method="post" >
 		<label for="nombre">Nombre:</label>
 		<input type="text" name="nombre" id="nombre"><br>
 
@@ -190,5 +140,7 @@ if (isset($_POST['volver'])) {
 			?>
 		</div>
 	</form>
+	</div>
+	
 </body>
 </html>
