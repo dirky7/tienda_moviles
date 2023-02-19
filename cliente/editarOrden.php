@@ -80,7 +80,7 @@ comprobarSiEstaLogeado();
 $id = $_GET['id'];
     if (isset($_POST['submit'])) {
         $precio=$_POST['precio'];
-        $observaciones=$_POST['resumenprecio'];
+        $observaciones=$_POST['observaciones'];
 
         actualizarIncidencia($id,$precio,$observaciones);
 
@@ -96,37 +96,48 @@ $id = $_GET['id'];
 
 	<?php
 	// Obtener el ID del registro a modificar
-	
+	$id = $_GET['id'];
 
 	// Obtener los datos del registro desde el archivo JSON
 	$datos = file_get_contents('incidencias.json');
 	$data = json_decode($datos, true);
-	$saveData = $data[$id-1];
+	foreach ($data as  $valor)
+		{
+			if ($valor['id'] == $id )
+			{
+				$nombre=$valor['nombre'];
+                $email=$valor['email'];
+                $problema=$valor['problema'];
+                $precio=$valor['precio'];
+                $fecha=$valor['fecha'];
+                $observaciones=$valor['observaciones'];
+			}
+		}
 	?>
 	<div class="formu">
 		<form method="post">
 
 			<label for="nombre">Nombre:</label>
-			<input type="text" name="nombre" id="nombre" value="<?php echo $saveData['nombre']; ?>" readonly><br><br>
+			<input type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>" readonly><br><br>
 
 
 			<label for="mail">Email:</label>
-			<input type="text" name="mail" id="mail" value="<?php echo $saveData['email']; ?>"readonly><br><br>
+			<input type="text" name="mail" id="mail" value="<?php echo $email; ?>"readonly><br><br>
 
 
-			<label for="texto">Problema:</label>
-			<textarea name="problema" id="problema" readonly><?php echo $saveData['problema']; ?></textarea><br><br>
+			<label for="problema">Problema:</label>
+			<textarea name="problema" id="problema" readonly><?php echo $problema; ?></textarea><br><br>
 
 			<label for="precio">Precio:</label>
-			<input type="number" name="precio" id="precio"value="<?php echo $saveData['precio']; ?>"requierd><br><br>
+			<input type="number" name="precio" id="precio"value="<?php echo $precio; ?>"><br><br>
 
 
 
-			<label for="resumenprecio">Observaciones:</label>
-			<textarea name="resumenprecio" id="resumenprecio" ><?php echo $saveData['observaciones']; ?></textarea><br><br>
+			<label for="observaciones">Observaciones:</label>
+			<textarea name="observaciones" id="observaciones" ><?php echo $observaciones; ?></textarea><br><br>
 
 			<label for="fecha">Fecha Inicio:</label>
-			<input type="text" name="fecha" id="fecha" value="<?php echo $saveData['fecha']; ?>"readonly><br><br>
+			<input type="text" name="fecha" id="fecha" value="<?php echo $fecha; ?>"readonly><br><br>
 			
 
 			<input type="submit" name="submit" value="Actualizar">
