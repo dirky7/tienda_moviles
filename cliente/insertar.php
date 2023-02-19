@@ -6,6 +6,7 @@ comprobarSiEstaLogeado(true);
 
 $mensaje = "";
 if (isset($_POST['submit'])) {
+	
 	$name = $_POST['nombre'];
 	$mail = $_POST['mail'];
 	$problema = $_POST['problema'];
@@ -13,12 +14,18 @@ if (isset($_POST['submit'])) {
 	$fecha = date("d-m-Y h:i");
 
 	$tecnico = $_POST['tecnico'];
+	
 	if (empty($name) || empty($mail) || empty($problema)) {
 		$mensaje = '<div style="background-color:#ffb3b3;padding:10px;border-radius:3px; ">Por favor completa los campos</div>';
 	} else {
-		$fecha = date('d/m/Y');
-		insertarIncidencia($name, $mail, $tecnico, $problema, $fecha);
-		$mensaje = '<div style="text-align:center;padding:10px;border-radius:3px;margin-top:15px; ">La incidencia se ha guardado exitosamente</div>';
+		if (validar_email($mail) == "") {
+			$fecha = date('d/m/Y');
+			insertarIncidencia($name, $mail, $tecnico, $problema, $fecha);
+			$mensaje = '<div style="text-align:center;padding:10px;border-radius:3px;margin-top:15px; ">La incidencia se ha guardado exitosamente</div>';
+		}else{
+			$mensaje=validar_email($mail);
+		}
+		
 	}
 }
 
