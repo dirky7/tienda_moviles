@@ -45,7 +45,7 @@ if (isset($_POST['volver']) && $_SESSION['usuario'] == "Invitado") {
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Tienda Moviles</title>
+	<title>Insertar Incidencia</title>
 	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/inicio.css">
@@ -106,6 +106,16 @@ if (isset($_POST['volver']) && $_SESSION['usuario'] == "Invitado") {
 						<li class="nav-item">
 							<a class="nav-link" href="gestion.php">Gestionar Incidencia</a>
 						</li>
+						<?php
+						if($_SESSION['usuario'] == "admin")
+						{
+						?>
+						<li class="nav-item">
+							<a class="nav-link" href="../usuarios.php">Gestionar Usuarios</a>
+						</li>
+						<?php
+						}
+						?>
 						<li class="nav-item">
 							<a class="nav-link" href="../logoff.php">Salir</a>
 						</li>

@@ -17,6 +17,9 @@ comprobarSiEstaLogeado();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <title>Inicio</title>
+    <style>
+
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-red navbar-dark">
@@ -61,44 +64,35 @@ comprobarSiEstaLogeado();
     <main>
         <ul class="card-wrapper">
             <?php
-				if ($_SESSION['usuario'] == "")
-				{
-					echo "
-					<li class='card'>
-						<img src='https://images.unsplash.com/photo-1611916656173-875e4277bea6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHw&ixlib=rb-1.2.1&q=80&w=400' alt=''>
-						<a href='cliente/insertar.php'>
-							<input type='button' value='Insertar Incidencia'>
-						</a>
-					</li>
-					";
-				}
-				else
+                if ($_SESSION['usuario'] != "")
 				{
 					//usuario: admin
 					//password: Adminjdm1
 					if ($_SESSION['usuario'] == "admin")
 					{
 						echo "
-						<li class='card'>
-							<img src='https://images.unsplash.com/photo-1611083360739-bdad6e0eb1fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHw&ixlib=rb-1.2.1&q=80&w=400' alt=''>
+						<li class='card reparacion'>
+                        <div class='rep'>
 							<a href='cliente/gestion.php'>
-								<input type='button' value='Gestionar Incidencia'>
+							    <input type='button' value='Gestionar Incidencia'>
 							</a>
+                        </div>
 						</li>
-						<li class='card'>
-							<img src='https://images.unsplash.com/photo-1613230485186-2e7e0fca1253?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHw&ixlib=rb-1.2.1&q=80&w=400' alt=''>
-							<a href='usuarios.php'>
-								<input type='button' value='Gestionar Usuarios'>
+						<li class='card usuarios'>
+                        <div class='rep'>
+                            <a href='usuarios.php'>
+							    <input type='button' value='Gestionar Usuarios'>
 							</a>
+                        </div>
 						</li>";
 					}
 					else
 					{
 						echo "
-						<li class='card'>
-							<img src='https://images.unsplash.com/photo-1611083360739-bdad6e0eb1fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHw&ixlib=rb-1.2.1&q=80&w=400' alt=''>
-							<a href='cliente/gestion.php'>
-								<input type='button' value='Gestionar Incidencia'>
+						<li class='card gesti'>
+                            <div class='gestion'>
+							    <input type='button' class='boton' value='Gestionar Incidencia'>
+                            </div>
 							</a>
 						</li>
 						";
