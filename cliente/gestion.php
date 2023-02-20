@@ -1,13 +1,18 @@
 <?php
 include("../config/funciones.php");
 
+//Inciamos la sesion
 session_start();
+//Comprobamos si esta logeado el usuario
 comprobarSiEstaLogeado();
 
+//Si existe el id
 if(isset($_GET['id'])) {
+    //añadimos el tecnico a la incidencia
     anyadirTecnicoIncidencia($_GET['id']);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,9 +54,6 @@ if(isset($_GET['id'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="../logoff.php">Salir</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
-                    </li>
                 </ul>
                 <div class="d-flex flex-column sim">
                     <span>Bienvenido <?php echo $_SESSION['usuario']; ?></span>
@@ -79,22 +81,34 @@ if(isset($_GET['id'])) {
         </nav>
 		<aside>
             <?php
+            //si existe fin
             if(isset($_GET['fin'])) {
+                //comprobamos que no haya datos vacio
                 if(comprobarNoHayDatosVacios($_GET['fin'])) {
+                    //actualizamos la incidencia
                     actualizarIncidenciaResuelta($_GET['fin']);
+                    //movemos la incidencia
                     moverIncidenciasResueltas($_GET['fin']);
+                //si hay datos vacios
                 } else {
                     echo "<p class='error'>Debes actualizar el precio y las observaciones</p>";
                 }
             }
 
+            //si pinchamos en incidencias
             if(isset($_POST['incidencias'])) {
+                //mostramos las incidencias
                 echo mostrarIncidencias();
+            //si pinchamos en incidencias resueltas
             } elseif(isset($_POST['incidencias_resueltas'])) {
+                //mostramos las incidencias resueltas
                 echo mostrarIncidenciasResueltas();
+            //si pinchamos en mis incidencias resueltas
             } elseif(isset($_POST['mis_incidencias_resueltas'])) {
+                //mostramos las incidencias del usuario logeado
                 echo mostrarIncidenciasResueltasUsuario();
             } else {
+                //mostramos las incidencias
                 echo mostrarIncidencias();
             }
             ?>

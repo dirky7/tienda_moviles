@@ -43,9 +43,6 @@ comprobarSiEstaLogeado();
                     <li class="nav-item">
                         <a class="nav-link" href="logoff.php">Salir</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
-                    </li>
                 </ul>
                 <div class="d-flex flex-column sim">
                     <span>Bienvenido <?php echo $_SESSION['usuario']; ?></span>

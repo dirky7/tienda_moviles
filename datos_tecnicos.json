@@ -1,58 +1,18 @@
 [
     {
-        "nombre": "Jesus",
-        "apellidos": "Sanchez",
-        "login": "jesus29",
-        "password": "XCm4cvZrKhNrs",
-        "email": "jesus29@gmail.com",
-        "autorizado": "si"
-    },
-    {
-        "nombre": "jesus",
-        "apellidos": "asa",
-        "login": "jesus291",
-        "password": "XCm4cvZrKhNrs",
-        "email": "jesus239@gmail.com",
-        "autorizado": "si"
-    },
-    {
-        "nombre": "mario",
-        "apellidos": "sanchez",
-        "login": "mario12",
-        "password": "XCusDbVAOxsis",
-        "email": "mario@gmail.com",
-        "autorizado": "no"
-    },
-    {
-        "nombre": "Daniel",
-        "apellidos": "Hurtado",
-        "login": "dani",
-        "password": "XC1s9g8ZHQy.E",
-        "email": "dani@gmail.com",
-        "autorizado": "si"
-    },
-    {
         "nombre": "admin",
         "apellidos": "admin",
         "login": "admin",
         "password": "XCS9A5lQczAxo",
         "email": "admin@gmail.com",
-        "autorizado": "si"
+        "autorizado": "Si"
     },
     {
-        "nombre": "prueba",
-        "apellidos": "p1",
-        "login": "prueba",
-        "password": "XCQYH2E9R0Mdo",
-        "email": "p1@gmail.com",
+        "nombre": "jesus",
+        "apellidos": "sanches",
+        "login": "jesus291",
+        "password": "XCm4cvZrKhNrs",
+        "email": "jesus@gmail.com",
         "autorizado": "no"
-    },
-    {
-        "nombre": "Migue",
-        "apellidos": "Gomez",
-        "login": "migue",
-        "password": "XCm3lj.pBxZxg",
-        "email": "migue@gmail.com",
-        "autorizado": "si"
     }
 ]

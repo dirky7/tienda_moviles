@@ -6,8 +6,8 @@ comprobarSiEstaLogeado();
 
 if (isset($_GET['login']))
 {
-	borrarUsuario($_GET['login']);
-	unset($_GET['login']);
+    borrarUsuario($_GET['login']);
+    header("Location:usuarios.php");
 }
 
 ?>
@@ -51,9 +51,6 @@ if (isset($_GET['login']))
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logoff.php">Salir</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
                     </li>
                 </ul>
                 <div class="d-flex flex-column sim">

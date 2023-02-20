@@ -1,48 +1,52 @@
 <?php
 include "../config/funciones.php";
+//Inciamos la si sesion
 session_start();
-
+//Comprobamos si esta logeado el usuario
 comprobarSiEstaLogeado(true);
 
 $mensaje = "";
+//si hemos pinchado en submit
 if (isset($_POST['submit'])) {
-	
+	//obtenos los datos
 	$name = $_POST['nombre'];
 	$mail = $_POST['mail'];
 	$problema = $_POST['problema'];
 	$tecnico = $_POST['tecnico'];
 	$fecha = date("d-m-Y h:i");
-
 	$tecnico = $_POST['tecnico'];
-	
+
+	//si estan vacios los campos
 	if (empty($name) || empty($mail) || empty($problema)) {
 		$mensaje = '<div style="background-color:#ffb3b3;padding:10px;border-radius:3px; ">Por favor completa los campos</div>';
+	//si no estan vacios
 	} else {
+        //si la validaicion del email es valido
 		if (validar_email($mail) == "") {
 			$fecha = date('d/m/Y');
+			//insertamos la incidencia
 			insertarIncidencia($name, $mail, $tecnico, $problema, $fecha);
 			$mensaje = '<div style="text-align:center;padding:10px;border-radius:3px;margin-top:15px; ">La incidencia se ha guardado exitosamente</div>';
-		}else{
-			$mensaje=validar_email($mail);
+		//si la validacion del email es incorrecta
+		} else {
+			$mensaje= "<div class='error'>".validar_email($mail)."</div>";
 		}
-		
 	}
 }
 
-if (isset($_POST['volver'])) {
+if (isset($_POST['volver']) && $_SESSION['usuario'] == "Invitado") {
 	header('Location:../logoff.php');
+} elseif(isset($_POST['volver'])) {
+	header('Location:../inicio.php');
 }
 
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>Tienda Moviles</title>
-	
 	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/inicio.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -51,10 +55,7 @@ if (isset($_POST['volver'])) {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="css/inicio.css">
-	
-		
 </head>
-
 <body>
 	<?php
 	if ($_SESSION['usuario'] == "Invitado") {
@@ -111,9 +112,6 @@ if (isset($_POST['volver'])) {
 						<li class="nav-item">
 							<a class="nav-link" href="../logoff.php">Salir</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#"><i class="fa fa-search"></i></a>
-						</li>
 					</ul>
 					<div class="d-flex flex-column sim">
 						<span>Bienvenido <?php echo $_SESSION['usuario']; ?></span>
@@ -126,28 +124,27 @@ if (isset($_POST['volver'])) {
 	}
 	?>
 	<div class="formu">
-	<form method="post" >
-		<label for="nombre">Nombre:</label>
-		<input type="text" name="nombre" id="nombre"><br>
+		<form method="post" >
+			<label for="nombre">Nombre:</label>
+			<input type="text" name="nombre" id="nombre"><br>
 
-		<label for="mail">Email:</label>
-		<input type="text" name="mail" id="mail"><br>
+			<label for="mail">Email:</label>
+			<input type="text" name="mail" id="mail"><br>
 
-		<input type="hidden" name="tecnico" id="tecnico" value="">
+			<input type="hidden" name="tecnico" id="tecnico" value="">
 
-		<label for="problema">Problema:</label>
-		<textarea name="problema" id="problema"></textarea><br>
+			<label for="problema">Problema:</label>
+			<textarea name="problema" id="problema"></textarea><br>
 
-		<input type="submit" name="submit" value="Guardar">
-		<input type="submit" name="volver" value="Volver">
+			<input type="submit" name="submit" value="Guardar">
+			<input type="submit" name="volver" value="Volver">
 
-		<div>
-			<?php
-			echo $mensaje;
-			?>
-		</div>
-	</form>
+			<div>
+				<?php
+				echo $mensaje;
+				?>
+			</div>
+		</form>
 	</div>
-	
 </body>
 </html>
