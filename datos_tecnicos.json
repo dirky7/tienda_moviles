@@ -8,11 +8,19 @@
         "autorizado": "Si"
     },
     {
-        "nombre": "jesus",
-        "apellidos": "sanches",
+        "nombre": "Azucar",
+        "apellidos": "Sanchez",
+        "login": "jesus29",
+        "password": "XCm4cvZrKhNrs",
+        "email": "jesus29@gmail.com",
+        "autorizado": "Si"
+    },
+    {
+        "nombre": "Azucar",
+        "apellidos": "Sanchez",
         "login": "jesus291",
         "password": "XCm4cvZrKhNrs",
-        "email": "jesus@gmail.com",
-        "autorizado": "no"
+        "email": "jesus29@gmail.com",
+        "autorizado": "Si"
     }
 ]

@@ -37,9 +37,16 @@ comprobarSiEstaLogeado();
                     <li class="nav-item">
                         <a class="nav-link" href="cliente/gestion.php">Gestionar Incidencia</a>
                     </li>
+                    <?php
+                    if($_SESSION['usuario'] == "admin")
+                    {
+                    ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">contacto</a>
+                        <a class="nav-link" href="usuarios.php">Gestionar Usuarios</a>
                     </li>
+                    <?php
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link" href="logoff.php">Salir</a>
                     </li>

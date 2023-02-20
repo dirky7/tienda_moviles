@@ -79,9 +79,6 @@ foreach ($datos as $valor) {
                         <a class="nav-link" href="gestion.php">Gestionar Incidencia</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">contacto</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="../logoff.php">Salir</a>
                     </li>
                 </ul>

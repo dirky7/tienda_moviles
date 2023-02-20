@@ -2,7 +2,7 @@
 include("config/funciones.php");
 
 session_start();
-comprobarSiEstaLogeado();
+comprobarSiEsAdministrador();
 
 if (isset($_GET['login']))
 {
@@ -10,7 +10,12 @@ if (isset($_GET['login']))
     header("Location:usuarios.php");
 }
 
+if (isset($_GET['estado'])) {
+    actualizarEstadoUsuarioAutorizado($_GET['estado']);
+    header("Location:usuarios.php");
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +52,7 @@ if (isset($_GET['login']))
                         <a class="nav-link" href="cliente/gestion.php">Gestionar Incidencia</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">contacto</a>
+                        <a class="nav-link" href="usuarios.php">Gestionar Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logoff.php">Salir</a>

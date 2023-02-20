@@ -2,10 +2,13 @@
 //Funcion que le pasamos un fichero y nos lo devuelve en un array
 function obtenerDatosJson($ruta)
 {
-	$datos_fichero = file_get_contents($ruta);
-	$json_datos = json_decode($datos_fichero, true);
-	//Devolvemos el contenido del fichero
-	return $json_datos;
+	if(file_exists($ruta))
+	{
+		$datos_fichero = file_get_contents($ruta);
+		$json_datos = json_decode($datos_fichero, true);
+		//Devolvemos el contenido del fichero
+		return $json_datos;
+	}
 }
 
 //Funcion para comprobar si existe el usuario
@@ -164,11 +167,21 @@ function mostrarUsuarios()
 									<td>" . $tecnico['apellidos'] . "</td>
 									<td>" . $tecnico['login'] . "</td>
 									<td>" . $tecnico['email'] . "</td>
-									<td>" . $tecnico['autorizado'] . "</td>
-									<td class='FinEdiBorr'>
-										WIP
-									</td>
-									<td class='FinEdiBorr'>
+									<td>" . $tecnico['autorizado'] . "</td>";
+									if($tecnico['autorizado'] == "Si") {
+										$tabla.= "<td>
+											<a href='usuarios.php?estado=$tecnico[login]'>
+												<input type='image' src='../img/intimidad.png'/>
+											</a>
+									</td>";
+									} else {
+										$tabla.= "<td>
+										<a href='usuarios.php?estado=$tecnico[login]'>
+											<input type='image' src='../img/permiso.png'/>
+										</a>
+									</td>";
+									}
+									$tabla.="<td class='FinEdiBorr'>
 										<a href='usuarios.php?login=$tecnico[login]'>
 											<input type='image' src='../img/borrar-usuario.png'/>
 										</a>
@@ -256,6 +269,7 @@ function mostrarIncidencias()
 									<th>Resuelto</th>
 								</tr>";
 			foreach ($incidencias as $incidencia) {
+				if ($incidencia['tecnico'] == "") {
 				$tabla .= "
 								<tr>
 									<td>" . $incidencia['nombre'] . "</td>
@@ -266,13 +280,13 @@ function mostrarIncidencias()
 									<td>" . $incidencia['resuelto'] . "</td>
 									<td>
 										<a href='gestion.php?id=$incidencia[id]'>
-										<input class='aceptar' type='image' src='../img/aceptar.png' name='aceptar'/>
+											<input class='aceptar' type='image' src='../img/aceptar.png' name='aceptar'/>
 										</a>
-									</td>";
+									</td>
+								</tr>";
+				}
 			}
-			$tabla .= "	</tr>
-							</table>
-						</div>";
+			$tabla .= "</table></div>";
 			return $tabla;
 		}
 	//si no hay incidencias
@@ -296,6 +310,12 @@ function comprobarSiEstaLogeado($invitado = false)
 		if (!isset($_SESSION['usuario']) || $_SESSION['usuario'] == "Invitado") {
 			die("Error debes <a href='../index.php'>identificarse</a>");
 		}
+	}
+}
+
+function comprobarSiEsAdministrador() {
+	if (!isset($_SESSION['usuario']) || $_SESSION['usuario'] != "admin") {
+		die("Error debes <a href='../index.php'>identificarse</a> como administrador");
 	}
 }
 
@@ -609,4 +629,36 @@ function actualizarIncidencia($id, $precio, $observaciones)
 	$nuevosdatos = json_encode($data, JSON_PRETTY_PRINT);
 	//sobrescribimos el fichero
 	file_put_contents('incidencias.json', $nuevosdatos);
+}
+
+//Funcion para comprobar si el usuario esta autorizado
+function comprobarUsuarioEstaAutorizado($login) {
+	//obtrnemos los tecnicos
+	$tecnicos = obtenerDatosJson('datos_tecnicos.json');
+	foreach ($tecnicos as $tecnico) {
+		//si el login es igual al login pasado por parametro y esta autorizado
+		if ($tecnico['login'] == $login && $tecnico['autorizado'] == 'Si') {
+			return true;
+		}
+	}
+	return false;
+}
+
+function actualizarEstadoUsuarioAutorizado($login) {
+	//obtrnemos los tecnicos
+	$tecnicos = obtenerDatosJson('datos_tecnicos.json');
+	foreach ($tecnicos as $clave => $valor) {
+		//si el login es igual al login pasado por parametro y no esta autorizado
+		if ($valor['login'] == $login && $valor['autorizado'] == "No") {
+			//cambios el estado de autorizado a Si
+			$tecnicos[$clave]['autorizado'] = "Si";
+		//si el login es igual al login pasado por parametro y esta autorizado
+		} elseif($valor['login'] == $login && $valor['autorizado'] == "Si") {
+			//cambios el estado de autorizado a No
+			$tecnicos[$clave]['autorizado'] = "No";
+		}
+	}
+	$data = json_encode($tecnicos, JSON_PRETTY_PRINT);
+	//sobreescribimos el fichero
+	file_put_contents('datos_tecnicos.json', $data);
 }

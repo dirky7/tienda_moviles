@@ -17,12 +17,16 @@ if (isset($_POST['inicioSesion'])) {
 			//comprobamos las credenciales de incio de sesion
 			if (comprobarInicioSesion($login, $password)) {
 				//Si son correctas las credenciales iniciamos la sesion
-				session_start();
-				//Guardamos el usuario y la hora en sesiones
-				$_SESSION['usuario'] = $login;
-				$_SESSION['hora'] = date("H:i", time());
-				//Nos redirige a la pagina de incio
-				header("Location:inicio.php");
+				if(comprobarUsuarioEstaAutorizado($login)) {
+					session_start();
+					//Guardamos el usuario y la hora en sesiones
+					$_SESSION['usuario'] = $login;
+					$_SESSION['hora'] = date("H:i", time());
+					//Nos redirige a la pagina de incio
+					header("Location:inicio.php");
+				} else {
+					$error = "Usuario no autorizado. Contacte con un administrador para ser autorizado";
+				}
 			//si las credenciales de incio de sesion son incorrectas
 			} else {
 				$error = "Datos incorrectos";

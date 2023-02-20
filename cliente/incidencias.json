@@ -1,20 +1,8 @@
 [
     {
-        "id": 1,
-        "nombre": "AS",
-        "email": "juan@gamil.es",
-        "tecnico": "jesus291",
-        "problema": "AS",
-        "fecha": "20\/02\/2023",
-        "resuelto": "No",
-        "precio": "0",
-        "fechaActu": "",
-        "observaciones": ""
-    },
-    {
         "id": 2,
-        "nombre": "Pepe",
-        "email": "pepe@gmail.com",
+        "nombre": "Mario",
+        "email": "mario21@gmail.com",
         "tecnico": "",
         "problema": "Pantalla rota",
         "fecha": "20\/02\/2023",

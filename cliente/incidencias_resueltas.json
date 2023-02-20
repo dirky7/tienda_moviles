@@ -1,74 +1,14 @@
 [
     {
-        "id": 4,
-        "nombre": "Jose",
-        "email": "jose922@gmail.com",
+        "id": 1,
+        "nombre": "Mario",
+        "email": "mario21@gmail.com",
         "tecnico": "jesus29",
-        "problema": "No funciona tactil",
-        "fecha": "17\/02\/2023",
-        "resuelto": "Si",
-        "precio": 10,
-        "fechaActu": "17-02-2023 08:30",
-        "observaciones": "sa"
-    },
-    {
-        "id": 2,
-        "nombre": "p1",
-        "email": "p1@gmail.com",
-        "tecnico": "dani",
-        "problema": "Movil escacharrao",
-        "fecha": "19\/02\/2023",
-        "resuelto": "Si",
-        "precio": "200",
-        "fechaActu": "19-02-2023 08:59",
-        "observaciones": "Cambio de modulo de pantalla"
-    },
-    {
-        "id": 1,
-        "nombre": "Azucar",
-        "email": "juan@gamil.es",
-        "tecnico": "admin",
-        "problema": "Nose",
+        "problema": "Pantalla rota",
         "fecha": "20\/02\/2023",
         "resuelto": "Si",
-        "precio": "150",
-        "fechaActu": "20-02-2023 11:27",
-        "observaciones": "ee"
-    },
-    {
-        "id": 1,
-        "nombre": "Azucar",
-        "email": "juan@gamil.es",
-        "tecnico": "admin",
-        "problema": "Nose",
-        "fecha": "20\/02\/2023",
-        "resuelto": "Si",
-        "precio": "150",
-        "fechaActu": "20-02-2023 11:27",
-        "observaciones": "ee"
-    },
-    {
-        "id": 1,
-        "nombre": "Azucar",
-        "email": "juan@gamil.es",
-        "tecnico": "admin",
-        "problema": "Nose",
-        "fecha": "20\/02\/2023",
-        "resuelto": "Si",
-        "precio": "150",
-        "fechaActu": "20-02-2023 11:27",
-        "observaciones": "ee"
-    },
-    {
-        "id": 2,
-        "nombre": "Pepe",
-        "email": "pepe@gamil.es",
-        "tecnico": "admin",
-        "problema": "Paque",
-        "fecha": "20\/02\/2023",
-        "resuelto": "Si",
-        "precio": "12",
-        "fechaActu": "20-02-2023 11:28",
-        "observaciones": "s"
+        "precio": "20",
+        "fechaActu": "20-02-2023 07:31",
+        "observaciones": "hoala"
     }
 ]

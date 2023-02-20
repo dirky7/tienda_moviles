@@ -107,9 +107,6 @@ if (isset($_POST['volver']) && $_SESSION['usuario'] == "Invitado") {
 							<a class="nav-link" href="gestion.php">Gestionar Incidencia</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">contacto</a>
-						</li>
-						<li class="nav-item">
 							<a class="nav-link" href="../logoff.php">Salir</a>
 						</li>
 					</ul>
@@ -137,8 +134,14 @@ if (isset($_POST['volver']) && $_SESSION['usuario'] == "Invitado") {
 			<textarea name="problema" id="problema"></textarea><br>
 
 			<input type="submit" name="submit" value="Guardar">
+			<?php
+			if($_SESSION['usuario'] != "Invitado")
+			{
+			?>
 			<input type="submit" name="volver" value="Volver">
-
+			<?php
+			}
+			?>
 			<div>
 				<?php
 				echo $mensaje;

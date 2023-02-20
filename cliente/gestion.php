@@ -10,6 +10,7 @@ comprobarSiEstaLogeado();
 if(isset($_GET['id'])) {
     //añadimos el tecnico a la incidencia
     anyadirTecnicoIncidencia($_GET['id']);
+    header("Location:gestion.php");
 }
 ?>
 
@@ -47,9 +48,6 @@ if(isset($_GET['id'])) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="gestion.php">Gestionar Incidencia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">contacto</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../logoff.php">Salir</a>
