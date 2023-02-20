@@ -45,7 +45,7 @@ foreach ($datos as $valor) {
 <head>
     <title></title>
     <meta charset="UTF-8">
-    <title>Tienda Moviles</title>
+    <title>Editar Incidencia</title>
     <link rel="stylesheet" type="text/css" href="css/inicio.css">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/inicio.css">
