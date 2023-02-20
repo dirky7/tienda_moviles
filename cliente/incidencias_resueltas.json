@@ -10,5 +10,17 @@
         "precio": 10,
         "fechaActu": "17-02-2023 08:30",
         "observaciones": "sa"
+    },
+    {
+        "id": 2,
+        "nombre": "p1",
+        "email": "p1@gmail.com",
+        "tecnico": "dani",
+        "problema": "Movil escacharrao",
+        "fecha": "19\/02\/2023",
+        "resuelto": "Si",
+        "precio": "200",
+        "fechaActu": "19-02-2023 08:59",
+        "observaciones": "Cambio de modulo de pantalla"
     }
 ]

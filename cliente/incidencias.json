@@ -10,5 +10,17 @@
         "precio": 0,
         "fechaActu": "",
         "observaciones": ""
+    },
+    {
+        "id": 2,
+        "nombre": "holi",
+        "email": "holi@gmail.com",
+        "tecnico": "prueba",
+        "problema": "cosa rota",
+        "fecha": "20\/02\/2023",
+        "resuelto": "No",
+        "precio": 0,
+        "fechaActu": "",
+        "observaciones": ""
     }
 ]

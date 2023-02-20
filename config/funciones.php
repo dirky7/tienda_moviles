@@ -131,6 +131,12 @@
 		//Devolvemos el contenido del fichero
         return $json_tecnicos;
     }
+	function obtenerJsonRuta($ruta) {
+        $incidencias = file_get_contents($ruta);
+        $json_tecnicos = json_decode($incidencias, true);
+		//Devolvemos el contenido del fichero
+        return $json_tecnicos;
+    }
 
 	function obtenerUsuarios()
 	{
@@ -163,6 +169,8 @@
 							<th>Login</th>
 							<th>Email</th>
 							<th>Autorización</th>
+							<th>Cambiar estado</th>
+							<th>Borrar</th>
 						</tr>";
             foreach($tecnicos as $tecnico)
 			{
@@ -173,7 +181,14 @@
 		                    <td>".$tecnico['login']."</td>
                     		<td>".$tecnico['email']."</td>
 							<td>".$tecnico['autorizado']."</td>
-							<td><
+							<td class='FinEdiBorr'>
+								WIP
+							</td>
+							<td class='FinEdiBorr'>
+								<a href='usuarios.php?login=$tecnico[login]'>
+									<input type='image' src='../img/borrar.png' name='cosa'/>
+								</a>
+							</td>
 						</tr>";
             }
 			$tabla.="
@@ -368,6 +383,37 @@
         file_put_contents('incidencias_resueltas.json', $data);
 		borrarIncidenciaResuelta($id);
     }
+
+	function quitarUsuarioIncidencia($login)
+	{
+		$incidencias = obtenerIncidenciasJson();
+		foreach ($incidencias as $incidencia)
+		{
+			if ($incidencia['tecnico'] == $login)
+			{
+				$incidencia['tecnico'] = "";
+			}
+		}
+		$data = json_encode($incidencias, JSON_PRETTY_PRINT);
+		file_put_contents('cliente/incidencias.json', $data);
+	}
+
+	function borrarUsuario($login)
+	{
+		quitarUsuarioIncidencia($login);
+		$datos_usuarios = obtenerJsonRuta("datos_tecnicos.json");
+		foreach ($datos_usuarios as $usuario)
+		{
+			if ($usuario['login'] == $login)
+			{
+				unset($usuario['login']);
+				break;
+			}
+		}
+		$datos_usuarios = array_values($datos_usuarios);
+		$data = json_encode($datos_tecnicos, JSON_PRETTY_PRINT);
+		file_put_contents('datos_tecnicos.json', $data);
+	}
 
 	function borrarIncidencia($id) {
 		$datos_tecnicos = obtenerIncidenciasJson();

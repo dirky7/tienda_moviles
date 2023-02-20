@@ -24,7 +24,7 @@ if(isset($_GET['id'])) {
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-red navbar-dark">
+	<nav class="navbar navbar-expand-lg navbar-red navbar-dark">
         <div class="wrapper">
         </div>
         <div class="container-fluid all-show">
